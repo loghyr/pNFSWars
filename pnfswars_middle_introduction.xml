@@ -3,26 +3,81 @@
 
 <section anchor="sec:intro" title="Introduction">
   <t>
-    Both Parllel Network File System (pNFS) and File Layout types
+    Both Parallel Network File System (pNFS) and the File Layout Type
     were defined in the Network File System (NFS) version 4.1
     protocol specification, <xref target='RFC5661' />. The Block
-    Layout was defined in <xref target='RFC5663' /> and the Object
-    Layout was in turn defined in <xref target='RFC5664' />.
+    Layout Type was defined in <xref target='RFC5663' /> and the Object
+    Layout Type was in turn defined in <xref target='RFC5664' />.
+  </t>
+
+  <t>
+    Some implementors have interpretted the text in Sections 12
+    ("Parallel NFS (pNFS)") and 13 ("NFSv4.1 as a Storage
+    Protocol in pNFS: the File Layout Type") of <xref target='RFC5661' />
+    as both being strictly for the File Layout Type. I.e., since
+    Section 13 was not covered in a separate RFC like those for
+    both the Block and Object Layout Types, there is some confusion
+    as to the responsibilities of both the Metadata Server (MDS) and
+    the Data Servers (DS).
+  </t>
+
+  <t>
+    As a consequence, new internet drafts (see <xref target='FlexFiles' />
+    and <xref target='Lustre' />) may not be meeting the requirements
+    to be a pNFS Layout Type.
   </t>
 </section>
 
 <section anchor='sec:defs' title='Definitions'>
   <t>
     <list style='hanging'>
-      <t hangText='Foreign Label:'>
-        is when a MAC implementation encounters a label in a format other 
-        than it uses for encoding.
+      <t hangText='Data Server (DS):'>
+        is one of the pNFS servers which provide the contents
+        of a file system object which is a regular file. Depending
+        on the layout, there might be one or more DSes over which
+        the data is striped. Note that while the MDS is strictly
+        accessed over the NFSv4.1 protocol, depending on the
+        Layout Type, the DS could be accessed via any protocol
+        that meets the pNFS requirements.
       </t>
 
-      <t hangText='Label Format Specifier (LFS):'>
-        is an identifier used by the client to establish
-        the syntactic format of the security label and the semantic meaning
-        of its components.
+      <t hangText='layout:'>
+        is a description of how a file's data is organized on one
+        or more storage devices.
+      </t>
+
+      <t hangText='layout stateid:'>
+        is a 128-bit quantity returned by a server that
+        uniquely defines the layout state provided by the server
+        for a specific layout that describes a Layout Type and
+        file (see Section 12.5.2 of <xref target='RFC5661' />).
+        Further, Section 12.5.3 describes the difference between
+        a layout stateid and a normal stateid.
+      </t>
+
+      <t hangText='Layout Type:'>
+        describes both the storage protocol used to
+        access the data and the aggregation scheme used to lays out
+        the file data on the underlying storage devices.
+      </t>
+
+      <t hangText='metadata:'>
+        is that part of the file system object which describes
+        the object and not the payload. E.g., it could be the
+        time since last modification, access, etc.
+      </t>
+
+      <t hangText='Metadata Server (MDS):'>
+        is the pNFS server which provides metadata information
+        for a file system object. It also is repsonsible for
+        generating layouts for file system objects.
+      </t>
+
+      <t hangText='stateid:'>
+        is a 128-bit quantity returned by a server that
+        uniquely defines the open and locking states provided by the
+        server for a specific open-owner or lock-owner/open-owner pair for
+        a specific file and type of lock.
       </t>
     </list>
   </t>

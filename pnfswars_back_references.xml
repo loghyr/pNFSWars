@@ -88,6 +88,20 @@
 <references title="Informative References">
 
 
+    <reference anchor='Lustre'>
+      <front>
+        <title>Parallel NFS (pNFS) Lustre Layout Operations</title>
+        <author initials="S." surname="Faibish" fullname="S. Faibish">
+          <organization>EMC</organization>
+        </author>
+        <author initials="P." surname="Tao" fullname="P. Tao">
+          <organization>EMC</organization>
+        </author>
+        <date year="2013" month="November" />
+      </front>
+      <seriesInfo name="draft-faibish-nfsv4-pnfs-lustre-layout-06" value="(Work In Progress)"/>
+    </reference>
+
     <reference anchor='FlexFiles'>
       <front>
         <title>Parallel NFS (pNFS) Flexible Files Layout</title>
