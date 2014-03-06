@@ -1,0 +1,10 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section anchor="sec:security" title="Security Considerations">
+  <t>
+    The MDS MUST be able to fence off a client's access to a file
+    stored on a DS. When it revokes the layout, the client's access
+    must be terminated.
+  </t>
+</section>

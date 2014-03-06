@@ -38,7 +38,9 @@
         the data is striped. Note that while the MDS is strictly
         accessed over the NFSv4.1 protocol, depending on the
         Layout Type, the DS could be accessed via any protocol
-        that meets the pNFS requirements.
+        that meets the pNFS requirements. Also, note that the
+        term 'storage device' is used interchangeably with DS
+        in <xref target='RFC5661' />.
       </t>
 
       <t hangText='layout:'>
@@ -71,6 +73,19 @@
         is the pNFS server which provides metadata information
         for a file system object. It also is repsonsible for
         generating layouts for file system objects.
+      </t>
+
+      <t hangText='Recalling a layout:'>
+        is when the MDS uses a back channel to inform the client
+        that the layout in a gracefull manner. Note that the client
+        could be able to flush any writes, etc. before replying to
+        the MDS.
+      </t>
+
+      <t hangText='Revoking a layout:'>
+        is when the MDS invalidates the layout such that neither
+        the MDS nor any DS will accept any access from the client
+        with that layout.
       </t>
 
       <t hangText='stateid:'>

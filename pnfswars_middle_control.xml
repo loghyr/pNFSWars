@@ -1,0 +1,48 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section anchor="sec:control" title="The Control Protocol">
+  <t>
+    In Section 12.2.6 of <xref target='RFC5661' />, the control
+    protocol is introduced. There is no specification of a control
+    protocol, and indded there need not be such a protocol in use
+    for any given implementation, but a set of requirements
+    are provided to describe the interaction between the MDS
+    and the DS, For the purposes of this draft, there are three
+    broad requirements of such interactions:
+
+    <list style='format (%d)'>
+      <t>
+        NFSv4.1 clients MUST be able to access a file directly through the
+        MDS and not the DS. I.e., the MDS must be able to rerivie
+        the data from the consituent DSes and present it back to
+        the client via normal NFSv4.1 operations. Whether the MDS
+        allows access over other protocols is strictly an implementation
+        detail.
+      </t>
+
+      <t>
+        The MDS MUST be able to restrict access to a file on the DSes
+        when it revokes a layout.
+      </t>
+
+      <t>
+        The DS MUST honor the byte range restrictions present in the
+        layout. I.e., if the layout only provides access to the first
+        2 MB of the file, then any access after that MUST NOT be granted.
+      </t>
+    </list>
+  </t>
+
+  <t>
+    There are some notable absences from those broad requirements:
+
+    <list style='format (%d)'>
+      <t>
+        The enforcement of
+        authentication and authorization so that restrictions that would be
+        enforced by the metadata server are also enforced by the storage device.
+      </t>
+    </list>
+  </t>
+</section>

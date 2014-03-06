@@ -85,6 +85,9 @@ FRONT_PREGEN = pnfswars_front.xml
 IDXMLSRC_BASE = \
 	pnfswars_middle_start.xml \
 	pnfswars_middle_introduction.xml \
+	pnfswars_middle_control.xml \
+	pnfswars_middle_security.xml \
+	pnfswars_middle_iana.xml \
 	pnfswars_middle_end.xml \
 	pnfswars_back_front.xml \
 	pnfswars_back_references.xml \
