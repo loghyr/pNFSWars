@@ -31,6 +31,12 @@
 <section anchor='sec:defs' title='Definitions'>
   <t>
     <list style='hanging'>
+      <t hangText='Control Protocol:'>
+        is a set of requirements for the communication of information
+        on layouts, stateids, file metadata, and file data between
+        the MDS and the DS.
+      </t>
+
       <t hangText='Data Server (DS):'>
         is one of the pNFS servers which provide the contents
         of a file system object which is a regular file. Depending

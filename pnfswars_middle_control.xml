@@ -5,7 +5,7 @@
   <t>
     In Section 12.2.6 of <xref target='RFC5661' />, the control
     protocol is introduced. There is no specification of a control
-    protocol, and indded there need not be such a protocol in use
+    protocol, and indeed there need not be such a protocol in use
     for any given implementation, but a set of requirements
     are provided to describe the interaction between the MDS
     and the DS, For the purposes of this draft, there are three
@@ -42,6 +42,14 @@
         The enforcement of
         authentication and authorization so that restrictions that would be
         enforced by the metadata server are also enforced by the storage device.
+        Examples include both export access checks and if the layout has an iomode
+        of LAYOUTIOMODE4_READ, then if the client attempts to write, the I/O may be rejected.
+        While DSes should make such checks on the layout iomode, <xref target='RFC5661' />
+        does not mandate that all Layout Types have to make such checks.
+      </t>
+
+      <t>
+        The allocation and deallocation of storage. I.e., creating and deleting files.
       </t>
     </list>
   </t>
