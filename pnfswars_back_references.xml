@@ -1,0 +1,103 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+  <references title="Normative References">
+
+    <reference anchor='RFC2119'>
+      <front>
+	<title abbrev='RFC Key Words'>Key words for use in RFCs to Indicate Requirement Levels</title>
+	<author initials='S.' surname='Bradner' fullname='Scott Bradner'>
+	  <organization>Harvard University</organization>
+	  <address>
+	    <postal>
+	      <street>1350 Mass. Ave.</street>
+	      <street>Cambridge</street>
+	    <street>MA 02138</street></postal>
+	    <phone>- +1 617 495 3864</phone>
+     	<email>sob@harvard.edu</email></address></author>
+     	<date year='1997' month='March' />
+      </front>
+    </reference>
+
+    <reference anchor='RFC5661'>
+      <front>
+  <title>Network File System (NFS) Version 4 Minor Version 1 Protocol</title>
+  <author initials="S." surname="Shepler" fullname="S. Shepler">
+    <organization>Storspeed, Inc.</organization>
+  </author>
+  <author initials="M." surname="Eisler" fullname="M. Eisler">
+    <organization>NetApp</organization>
+  </author>
+  <author initials="D." surname="Noveck" fullname="D. Noveck">
+    <organization>NetApp</organization>
+  </author>
+  <date year="2010" month="January"/>
+      </front>
+      <seriesInfo name="RFC" value="5661"/>
+      <format type="TXT" octets="600988"
+        target="ftp://ftp.isi.edu/in-notes/rfc5661.txt"/>
+    </reference>
+
+<reference anchor='RFC5663'>
+<front>
+<title>pNFS Block/Volume Layout</title>
+
+<author initials='D' surname='Black' fullname='David Black'>
+    <organization />
+</author>
+
+<author initials='S' surname='Fridella' fullname='Stephen Fridella'>
+    <organization />
+</author>
+
+<author initials='J' surname='Glasgow' fullname='Jason Glasgow'>
+    <organization />
+</author>
+
+  <date month='January' year='2010' />
+<abstract><t>Parallel NFS (pNFS) extends NFSv4 to allow clients to directly access file data on the storage used by the NFSv4 server.  This ability to bypass the server for data access can increase both performance and parallelism, but requires additional client functionality for data access, some of which is dependent on the class of storage used.  The main pNFS operations draft specifies storage-class-independent extensions to NFS; this draft specifies the additional extensions (primarily data structures) for use of pNFS with block and volume based storage.</t></abstract>
+
+</front>
+
+      <seriesInfo name='RFC' value='5663' />
+      <format type='TXT' target='http://ietf.org/rfc/rfc5663.txt' />
+</reference>
+
+    <reference anchor='RFC5664'>
+      <front>
+  <title>Object-Based Parallel NFS (pNFS) Operations</title>
+  <author initials="B." surname="Halevy" fullname="B. Halevy">
+    <organization>Panasas</organization>
+  </author>
+  <author initials="B." surname="Welch" fullname="B. Welch">
+    <organization>Panasas</organization>
+  </author>
+  <author initials="J." surname="Zelenka" fullname="J. Zelenka">
+    <organization>Panasas</organization>
+  </author>
+  <date year="2010" month="January"/>
+      </front>
+      <seriesInfo name="RFC" value="5664"/>
+      <format type="TXT"
+        target="ftp://ftp.isi.edu/in-notes/rfc5664.txt"/>
+    </reference>
+
+
+</references>
+
+<references title="Informative References">
+
+
+    <reference anchor='FlexFiles'>
+      <front>
+        <title>Parallel NFS (pNFS) Flexible Files Layout</title>
+        <author initials="B." surname="Halevy" fullname="B. Halevy">
+          <organization>Primary Data</organization>
+        </author>
+        <date year="2013" month="October" />
+      </front>
+      <seriesInfo name="draft-bhalevy-nfsv4-flex-files-01" value="(Work In Progress)"/>
+    </reference>
+
+
+</references>

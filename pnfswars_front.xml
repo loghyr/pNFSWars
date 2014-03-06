@@ -1,0 +1,41 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<front>
+    <title abbrev="pNFSWars">
+      Requirement wars: pNFS vs File Layouts
+    </title>
+
+    <author fullname="Thomas Haynes"
+            initials="T."
+            surname="Haynes">
+      <organization abbrev="NetApp">NetApp</organization>
+      <address>
+        <postal>
+          <street>495 E Java Dr</street>
+          <city>Sunnyvale</city>
+          <region>CA</region>
+          <code>95054</code>
+          <country>USA</country>
+        </postal>
+        <phone>+1 408 419 3018</phone>
+        <email>thomas@netapp.com</email>
+      </address>
+    </author>
+
+    <date year="YEARVAR" month="MONTHVAR" day="DAYVAR"/>
+
+    <area>Transport</area>
+    <workgroup>NFSv4</workgroup>
+    <keyword>NFSv4</keyword>
+
+    <abstract>
+      <t>
+        This document provides guidelines for identifying the fine line
+        between the requirements for Network File System (NFS) version 4.1's
+        Parallel NFS (pNFS) and those for the pNFS File Layout. Implementors
+        trying to specify new layout types are having difficulty in separating
+        the two sets of requirements.
+      </t>
+    </abstract>
+</front>
