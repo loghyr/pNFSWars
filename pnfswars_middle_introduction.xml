@@ -24,7 +24,9 @@
   <t>
     As a consequence, new internet drafts (see <xref target='FlexFiles' />
     and <xref target='Lustre' />) may not be meeting the requirements
-    to be a pNFS Layout Type.
+    to be a pNFS Layout Type. This document clarifies what are
+    Layout Type independent requirements placed on all Layout Types,
+    whether one of the original three or any new variant.
   </t>
 </section>
 

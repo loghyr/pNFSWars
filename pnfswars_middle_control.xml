@@ -44,6 +44,7 @@
         enforced by the metadata server are also enforced by the storage device.
         Examples include both export access checks and if the layout has an iomode
         of LAYOUTIOMODE4_READ, then if the client attempts to write, the I/O may be rejected.
+        <vspace blankLines="1"/>
         While DSes should make such checks on the layout iomode, <xref target='RFC5661' />
         does not mandate that all Layout Types have to make such checks.
       </t>
@@ -52,5 +53,9 @@
         The allocation and deallocation of storage. I.e., creating and deleting files.
       </t>
     </list>
+
+    <cref anchor='AI1 ' source='TH'>
+      This lack of MUST on LAYOUTIOMODE4_READ sounds bogus. Why wouldn't all Layout Types do that?
+    </cref>
   </t>
 </section>
