@@ -3,8 +3,8 @@
 
 <section anchor="sec:security" title="Security Considerations">
   <t>
-    The MDS MUST be able to fence off a client's access to a file
-    stored on a DS. When it revokes the layout, the client's access
+    The metadata server MUST be able to fence off a client's access to a file
+    stored on a storage device. When it revokes the layout, the client's access
     must be terminated.
   </t>
 </section>

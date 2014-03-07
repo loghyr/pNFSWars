@@ -7,29 +7,42 @@
     protocol is introduced. There is no specification of a control
     protocol, and indeed there need not be such a protocol in use
     for any given implementation, but a set of requirements
-    are provided to describe the interaction between the MDS
-    and the DS, For the purposes of this draft, there are three
-    broad requirements of such interactions:
+    are provided to describe the interaction between the metadata server
+    and the storage device, The broad requirements of such interactions are:
 
     <list style='format (%d)'>
       <t>
         NFSv4.1 clients MUST be able to access a file directly through the
-        MDS and not the DS. I.e., the MDS must be able to rerivie
-        the data from the consituent DSes and present it back to
-        the client via normal NFSv4.1 operations. Whether the MDS
+        metadata server and not the storage device. I.e., the metadata server must be able to retrieve
+        the data from the consituent storage devices and present it back to
+        the client via normal NFSv4.1 operations. Whether the metadata server
         allows access over other protocols is strictly an implementation
         detail.
       </t>
 
       <t>
-        The MDS MUST be able to restrict access to a file on the DSes
+        The metadata server MUST be able to restrict access to a file on the storage devices
         when it revokes a layout.
       </t>
 
       <t>
-        The DS MUST honor the byte range restrictions present in the
+        Storage device MUST honor the byte range restrictions present in the
         layout. I.e., if the layout only provides access to the first
         2 MB of the file, then any access after that MUST NOT be granted.
+      </t>
+
+      <t>
+        Storage devices MUST NOT remove NFSv4.1's access controls: ACLs and
+        file open modes.
+      </t>
+
+      <t>
+        The metadata server and the storage devices MUST agree on 
+        attributes like modify time, the change attribute, and the end-of-
+        file (EOF) position.
+        <vspace blankLines="1"/>
+        Note that "agree" here means that some state changes need not be propagated
+        immediately, although all changes SHOULD be propagated promptly.
       </t>
     </list>
   </t>
@@ -45,7 +58,7 @@
         Examples include both export access checks and if the layout has an iomode
         of LAYOUTIOMODE4_READ, then if the client attempts to write, the I/O may be rejected.
         <vspace blankLines="1"/>
-        While DSes should make such checks on the layout iomode, <xref target='RFC5661' />
+        While storage devices should make such checks on the layout iomode, <xref target='RFC5661' />
         does not mandate that all Layout Types have to make such checks.
       </t>
 
@@ -58,4 +71,5 @@
       This lack of MUST on LAYOUTIOMODE4_READ sounds bogus. Why wouldn't all Layout Types do that?
     </cref>
   </t>
+
 </section>

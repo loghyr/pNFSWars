@@ -18,13 +18,13 @@
     Section 13 was not covered in a separate RFC like those for
     both the Block and Object Layout Types, there is some confusion
     as to the responsibilities of both the Metadata Server (MDS) and
-    the Data Servers (DS).
+    the Data Servers (DS) which were laid out in Section 12.
   </t>
 
   <t>
     As a consequence, new internet drafts (see <xref target='FlexFiles' />
-    and <xref target='Lustre' />) may not be meeting the requirements
-    to be a pNFS Layout Type. This document clarifies what are
+    and <xref target='Lustre' />) may be struggle to meet the requirements
+    to be a pNFS Layout Type. This document clarifies what are the
     Layout Type independent requirements placed on all Layout Types,
     whether one of the original three or any new variant.
   </t>
@@ -36,19 +36,22 @@
       <t hangText='Control Protocol:'>
         is a set of requirements for the communication of information
         on layouts, stateids, file metadata, and file data between
-        the MDS and the DS.
+        the metadata server and the storage devices.
       </t>
 
       <t hangText='Data Server (DS):'>
         is one of the pNFS servers which provide the contents
         of a file system object which is a regular file. Depending
-        on the layout, there might be one or more DSes over which
-        the data is striped. Note that while the MDS is strictly
+        on the layout, there might be one or more data servers over which
+        the data is striped. Note that while the metadata server is strictly
         accessed over the NFSv4.1 protocol, depending on the
-        Layout Type, the DS could be accessed via any protocol
-        that meets the pNFS requirements. Also, note that the
-        term 'storage device' is used interchangeably with DS
-        in <xref target='RFC5661' />.
+        Layout Type, the data server could be accessed via any protocol
+        that meets the pNFS requirements.
+      </t>
+
+      <t hangText='fencing:'>
+        is when the metadata server prevents the client from sending
+        I/O to all storage devices for a specfic file.
       </t>
 
       <t hangText='layout:'>
@@ -84,15 +87,15 @@
       </t>
 
       <t hangText='Recalling a layout:'>
-        is when the MDS uses a back channel to inform the client
+        is when the metadata server uses a back channel to inform the client
         that the layout in a gracefull manner. Note that the client
         could be able to flush any writes, etc. before replying to
-        the MDS.
+        the metadata server.
       </t>
 
       <t hangText='Revoking a layout:'>
-        is when the MDS invalidates the layout such that neither
-        the MDS nor any DS will accept any access from the client
+        is when the metadata server invalidates the layout such that neither
+        the metadata server nor any storage device will accept any access from the client
         with that layout.
       </t>
 
@@ -102,6 +105,11 @@
         server for a specific open-owner or lock-owner/open-owner pair for
         a specific file and type of lock.
       </t>
+
+      <t hangText='storage device:'>
+        is another term used interchangeably with data server.
+      </t>
+
     </list>
   </t>
 
