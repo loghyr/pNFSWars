@@ -2,74 +2,99 @@
 <!-- Copyright (C) The Internet Society (2014) -->
 
 <section anchor="sec:control" title="The Control Protocol">
-  <t>
-    In Section 12.2.6 of <xref target='RFC5661' />, the control
-    protocol is introduced. There is no specification of a control
-    protocol, and indeed there need not be such a protocol in use
-    for any given implementation, but a set of requirements
-    are provided to describe the interaction between the metadata server
-    and the storage device, The broad requirements of such interactions are:
+  <section anchor="sec:control:req" title="Protocol Requirements">
+    <t>
+      In Section 12.2.6 of <xref target='RFC5661' />, the control
+      protocol is introduced. There is no specification of a control
+      protocol, and indeed there need not be such a protocol in use
+      for any given implementation, but a set of requirements
+      are provided to describe the interaction between the metadata server
+      and the storage device, The broad requirements of such interactions are:
 
-    <list style='format (%d)'>
-      <t>
-        NFSv4.1 clients MUST be able to access a file directly through the
-        metadata server and not the storage device. I.e., the metadata server must be able to retrieve
-        the data from the consituent storage devices and present it back to
-        the client via normal NFSv4.1 operations. Whether the metadata server
-        allows access over other protocols is strictly an implementation
-        detail.
-      </t>
+      <list style='format (%d)'>
+        <t>
+          NFSv4.1 clients MUST be able to access a file directly through the
+          metadata server and not the storage device. I.e., the metadata server must be able to retrieve
+          the data from the consituent storage devices and present it back to
+          the client via normal NFSv4.1 operations. Whether the metadata server
+          allows access over other protocols is strictly an implementation
+          detail.
+        </t>
 
-      <t>
-        The metadata server MUST be able to restrict access to a file on the storage devices
-        when it revokes a layout.
-      </t>
+        <t>
+          The metadata server MUST be able to restrict access to a file on the storage devices
+          when it revokes a layout.
+        </t>
 
-      <t>
-        Storage device MUST honor the byte range restrictions present in the
-        layout. I.e., if the layout only provides access to the first
-        2 MB of the file, then any access after that MUST NOT be granted.
-      </t>
+        <t>
+          Storage devices MUST NOT remove NFSv4.1's access controls: ACLs and
+          file open modes.
+        </t>
 
-      <t>
-        Storage devices MUST NOT remove NFSv4.1's access controls: ACLs and
-        file open modes.
-      </t>
+        <t>
+          The metadata server and the storage devices MUST agree on 
+          attributes like modify time, the change attribute, and the end-of-
+          file (EOF) position.
+          <vspace blankLines="1"/>
+          Note that "agree" here means that some state changes need not be propagated
+          immediately, although all changes SHOULD be propagated promptly.
+        </t>
+      </list>
+    </t>
+  </section>
 
-      <t>
-        The metadata server and the storage devices MUST agree on 
-        attributes like modify time, the change attribute, and the end-of-
-        file (EOF) position.
-        <vspace blankLines="1"/>
-        Note that "agree" here means that some state changes need not be propagated
-        immediately, although all changes SHOULD be propagated promptly.
-      </t>
-    </list>
-  </t>
+  <section anchor="sec:control:nonreq" title="Non-protocol Requirements">
+    <t>
+      There are some notable absences from those broad requirements:
 
-  <t>
-    There are some notable absences from those broad requirements:
+      <list style='format (%d)'>
+        <t>
+          Storage device MUST honor the byte range restrictions present in the
+          layout. I.e., if the layout only provides access to the first
+          2 MB of the file, then any access after that MUST NOT be granted.
+        </t>
 
-    <list style='format (%d)'>
-      <t>
-        The enforcement of
-        authentication and authorization so that restrictions that would be
-        enforced by the metadata server are also enforced by the storage device.
-        Examples include both export access checks and if the layout has an iomode
-        of LAYOUTIOMODE4_READ, then if the client attempts to write, the I/O may be rejected.
-        <vspace blankLines="1"/>
-        While storage devices should make such checks on the layout iomode, <xref target='RFC5661' />
-        does not mandate that all Layout Types have to make such checks.
-      </t>
+        <t>
+          The enforcement of
+          authentication and authorization so that restrictions that would be
+          enforced by the metadata server are also enforced by the storage device.
+          Examples include both export access checks and if the layout has an iomode
+          of LAYOUTIOMODE4_READ, then if the client attempts to write, the I/O may be rejected.
+          <vspace blankLines="1"/>
+          While storage devices should make such checks on the layout iomode, <xref target='RFC5661' />
+          does not mandate that all Layout Types have to make such checks.
+        </t>
 
-      <t>
-        The allocation and deallocation of storage. I.e., creating and deleting files.
-      </t>
-    </list>
+        <t>
+          The allocation and deallocation of storage. I.e., creating and deleting files.
+        </t>
+      </list>
+    </t>
 
-    <cref anchor='AI1 ' source='TH'>
-      This lack of MUST on LAYOUTIOMODE4_READ sounds bogus. Why wouldn't all Layout Types do that?
-    </cref>
-  </t>
+    <t>
+      Of these, the first two are of concern to this draft and Layout Types SHOULD honor
+      them if at all possible,
+    </t>
+  </section>
 
+  <section anchor="sec:control:edits" title="Editorial Requirements">
+    <t>
+      In addition to these protocol requirements, there are two editorial requirements for drafts
+      that present a new Layout Type. There MUST be sections which decribe:
+
+      <list style='format (%d)'>
+        <t>
+          The apporach the new Layout Type takes towards fencing clients once the
+          metadata server determines that the layout is revoked.
+        </t>
+
+        <t>
+          The security considerations of the new Layout Type.
+        </t>
+      </list>
+
+      While these could be envisioned as one section in that the fencing issue might be
+      the only security issue, it is recommended to deal with them seperably.
+    </t>
+  </section>
 </section>

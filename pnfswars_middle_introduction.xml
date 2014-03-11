@@ -33,7 +33,7 @@
 <section anchor='sec:defs' title='Definitions'>
   <t>
     <list style='hanging'>
-      <t hangText='Control Protocol:'>
+      <t hangText='control protocol:'>
         is a set of requirements for the communication of information
         on layouts, stateids, file metadata, and file data between
         the metadata server and the storage devices.
@@ -86,14 +86,14 @@
         generating layouts for file system objects.
       </t>
 
-      <t hangText='Recalling a layout:'>
+      <t hangText='recalling a layout:'>
         is when the metadata server uses a back channel to inform the client
         that the layout in a gracefull manner. Note that the client
         could be able to flush any writes, etc. before replying to
         the metadata server.
       </t>
 
-      <t hangText='Revoking a layout:'>
+      <t hangText='revoking a layout:'>
         is when the metadata server invalidates the layout such that neither
         the metadata server nor any storage device will accept any access from the client
         with that layout.
