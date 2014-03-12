@@ -15,7 +15,7 @@
           DS SHOULD validate byte ranges.
         </t>
         <t>
-The stateid used for I/O MUST have the same effect and be subject to
+   The stateid used for I/O MUST have the same effect and be subject to
    the same validation on a data server as it would if the I/O was being
    performed on the metadata server itself in the absence of pNFS.
         </t>
@@ -47,16 +47,144 @@ The stateid used for I/O MUST have the same effect and be subject to
     </t>
   </section>
 
-  <section anchor="sec:fencing:objects" title="Object Layout Type">
+  <section anchor="sec:fencing:blocks" title="Block Layout Type">
     <t>
       <list style='format (%d)'>
         <t>
+      Typically, storage area network (SAN) disk arrays and SAN
+      protocols provide access control mechanisms (e.g., Logical Unit
+      Number (LUN) mapping and/or masking), which operate at the
+      granularity of individual hosts, not individual blocks.  For this
+      reason, block-based protection must be provided by the client
+      software.
+        </t>
+
+        <t>
+      Similarly, SAN disk arrays and SAN protocols typically are not
+      able to validate NFS locks that apply to file regions.  For
+      instance, if a file is covered by a mandatory read-only lock, the
+      server can ensure that only readable layouts for the file are
+      granted to pNFS clients.  However, it is up to each pNFS client to
+      ensure that the readable layout is used only to service read
+      requests, and not to allow writes to the existing parts of the
+      file.
+        </t>
+
+        <t>
+   Since block/volume storage systems are generally not capable of
+   enforcing such file-based security, in environments where pNFS
+   clients cannot be trusted to enforce such policies, pNFS block/volume
+   storage layouts SHOULD NOT be used.
+        </t>
+
+        <t>
+   Note that the block/volume layout supports unilateral layout
+   revocation.  When a layout is unilaterally revoked by the server,
+   usually due to the client's lease time expiring, or a delegation
+   being recalled, or the client failing to return a layout in a timely
+   manner, it is important for the sake of correctness that any in-
+   flight I/Os that the client issued before the layout was revoked are
+   rejected at the storage.  For the block/volume protocol, this is
+   possible by fencing a client with an expired layout timer from the
+   physical storage.  Note, however, that the granularity of this
+   operation can only be at the host/logical-unit level.  Thus, if one
+   of a client's layouts is unilaterally revoked by the server, it will
+   effectively render useless *all* of the client's layouts for files
+   located on the storage units comprising the logical volume.  This may
+   render useless the client's layouts for files in other file systems.
+        </t>
+
+        <t>
+   Layout extents returned to pNFS clients grant permission to read or
+   write; PNFS_BLOCK_READ_DATA and PNFS_BLOCK_NONE_DATA are read-only
+   (PNFS_BLOCK_NONE_DATA reads as zeroes), PNFS_BLOCK_READ_WRITE_DATA
+   and PNFS_BLOCK_INVALID_DATA are read/write, (PNFS_BLOCK_INVALID_DATA
+   reads as zeros, any write converts it to PNFS_BLOCK_READ_WRITE_DATA).
+   This is the only means a client has of obtaining permission to
+   perform direct I/O to storage devices; a pNFS client MUST NOT perform
+   direct I/O operations that are not permitted by an extent held by the
+   client.  Client adherence to this rule places the pNFS server in
+   control of potentially conflicting storage device operations,
+   enabling the server to determine what does conflict and how to avoid
+   conflicts by granting and recalling extents to/from clients.
+        </t>
+
+        <t>
+   NFSv4 supports mandatory locks and share reservations.  These are
+   mechanisms that clients can use to restrict the set of I/O operations
+   that are permissible to other clients.  Since all I/O operations
+   ultimately arrive at the NFSv4 server for processing, the server is
+   in a position to enforce these restrictions.  However, with pNFS
+   layouts, I/Os will be issued from the clients that hold the layouts
+   directly to the storage devices that host the data.  These devices
+   have no knowledge of files, mandatory locks, or share reservations,
+   and are not in a position to enforce such restrictions.  For this
+   reason the NFSv4 server MUST NOT grant layouts that conflict with
+   mandatory locks or share reservations.  Further, if a conflicting
+   mandatory lock request or a conflicting open request arrives at the
+   server, the server MUST recall the part of the layout in conflict
+   with the request before granting the request.
+        </t>
+
+        <t>
+   When a client receives layout information via a LAYOUTGET operation,
+   those layouts are valid for at most "lease_time" seconds from when
+   the server granted them.  A layout is renewed by any successful
+   SEQUENCE operation, or whenever a new stateid is created or updated
+   (see the section "Lease Renewal" of [NFSv4.1]).  If the layout lease
+   is not renewed prior to expiration, the client MUST cease to use the
+   layout after "lease_time" seconds from when it either sent the
+   original LAYOUTGET command or sent the last operation renewing the
+   lease.  In other words, the client may not issue any I/O to blocks
+   specified by an expired layout.  In the presence of large
+   communication delays between the client and server, it is even
+   possible for the lease to expire prior to the server response
+   arriving at the client.  In such a situation, the client MUST NOT use
+   the expired layouts, and SHOULD revert to using standard NFSv41 READ
+   and WRITE operations.  Furthermore, the client must be configured
+   such that I/O operations complete within the "blh_maximum_io_time"
+   even in the presence of multipath drivers that will retry I/Os via
+   multiple paths.
+        </t>
+
+        <t>
+   Typically, SAN disk arrays and SAN protocols provide access control
+   mechanisms (e.g., LUN mapping and/or masking) that operate at the
+   granularity of individual hosts.  The functionality provided by such
+   mechanisms makes it possible for the server to "fence" individual
+   client machines from certain physical disks -- that is to say, to
+   prevent individual client machines from reading or writing to certain
+   physical disks.  Finer-grained access control methods are not
+   generally available.  For this reason, certain security
+   responsibilities are delegated to pNFS clients for block/volume
+   layouts.  Block/volume storage systems generally control access at a
+   volume granularity, and hence pNFS clients have to be trusted to only
+   perform accesses allowed by the layout extents they currently hold
+   (e.g., and not access storage for files on which a layout extent is
+   not held).  In general, the server will not be able to prevent a
+   client that holds a layout for a file from accessing parts of the
+   physical disk not covered by the layout.  Similarly, the server will
+   not be able to prevent a client from accessing blocks covered by a
+   layout that it has already returned.  This block-based level of
+   protection must be provided by the client software.
+        </t>
+
+        <t>
+   Access to block/volume storage is logically at a lower layer of the
+   I/O stack than NFSv4, and hence NFSv4 security is not directly
+   applicable to protocols that access such storage directly.
+        </t>
+
+        <t>
+   In environments where
+   the security requirements for the storage protocol cannot be met,
+   pNFS block/volume storage layouts SHOULD NOT be used.
         </t>
       </list>
     </t>
   </section>
 
-  <section anchor="sec:fencing:blocks" title="Block Layout Type">
+  <section anchor="sec:fencing:objects" title="Object Layout Type">
     <t>
       <list style='format (%d)'>
         <t>
