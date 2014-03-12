@@ -41,6 +41,12 @@
         </t>
       </list>
     </t>
+
+    <t>
+      Note that there is no requirement on how these are implemented. While the File Layout
+      Type does use the stateid to fence off the client, there is no requirement that
+      other Layout Types use this stateid approach.
+    </t>
   </section>
 
   <section anchor="sec:control:nonreq" title="Non-protocol Requirements">

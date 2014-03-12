@@ -86,6 +86,7 @@ IDXMLSRC_BASE = \
 	pnfswars_middle_start.xml \
 	pnfswars_middle_introduction.xml \
 	pnfswars_middle_control.xml \
+	pnfswars_middle_fencing.xml \
 	pnfswars_middle_security.xml \
 	pnfswars_middle_iana.xml \
 	pnfswars_middle_end.xml \

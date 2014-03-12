@@ -1,0 +1,67 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section anchor="sec:fencing" title="Implementations in Existing Layout Types">
+  <section anchor="sec:fencing:files" title="File Layout Type">
+    <t>
+      <list style='format (%d)'>
+        <t>
+          DS SHOULD validate that client holds a valid layout.
+        </t>
+        <t>
+          DS SHOULD validate iomode.
+        </t>
+        <t>
+          DS SHOULD validate byte ranges.
+        </t>
+        <t>
+The stateid used for I/O MUST have the same effect and be subject to
+   the same validation on a data server as it would if the I/O was being
+   performed on the metadata server itself in the absence of pNFS.
+        </t>
+        <t>
+   Fencing works as follows.  As described in Section 13.1, in COMPOUND
+   procedure requests to the data server, the data filehandle provided
+   by the PUTFH operation and the stateid in the READ or WRITE operation
+   are used to ensure that the client has a valid layout for the I/O
+   being performed; if it does not, the I/O is rejected with
+   NFS4ERR_PNFS_NO_LAYOUT.  The server can simply check the stateid and,
+   additionally, make the data filehandle stale if the layout specified
+   a data filehandle that is different from the metadata server's
+   filehandle for the file (see the nfl_fh_list description in
+   Section 13.3).
+        </t>
+        <t>
+   The NFSv4.1 file layout type MUST adhere to the security
+   considerations outlined in Section 12.9.  NFSv4.1 data servers MUST
+   make all of the required access checks on each READ or WRITE I/O as
+   determined by the NFSv4.1 protocol.  If the metadata server would
+   deny a READ or WRITE operation on a file due to its ACL, mode
+   attribute, open access mode, open deny mode, mandatory byte-range
+   lock state, or any other attributes and state, the data server MUST
+   also deny the READ or WRITE operation.  This impacts the control
+   protocol and the propagation of state from the metadata server to the
+   data servers; see Section 13.9.2 for more details.
+        </t>
+      </list>
+    </t>
+  </section>
+
+  <section anchor="sec:fencing:objects" title="Object Layout Type">
+    <t>
+      <list style='format (%d)'>
+        <t>
+        </t>
+      </list>
+    </t>
+  </section>
+
+  <section anchor="sec:fencing:blocks" title="Block Layout Type">
+    <t>
+      <list style='format (%d)'>
+        <t>
+        </t>
+      </list>
+    </t>
+  </section>
+</section>
