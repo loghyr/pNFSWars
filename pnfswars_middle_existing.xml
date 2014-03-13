@@ -52,16 +52,29 @@
 
   <section anchor="sec:fencing:blocks" title="Block Layout Type">
     <t>
-      <list style='format (%d)'>
-        <t>
+      With the Block Layout Type, the storage devices are not guareenteed
+      to be able to enforce file-based security.
       Typically, storage area network (SAN) disk arrays and SAN
       protocols provide access control mechanisms (e.g., Logical Unit
       Number (LUN) mapping and/or masking), which operate at the
-      granularity of individual hosts, not individual blocks.  For this
-      reason, block-based protection must be provided by the client
-      software.
-        </t>
+      granularity of individual hosts, not individual blocks.
+      As such, <xref target='RFC5663' />
+      is very careful to define that in environments where pNFS
+      clients cannot be trusted to enforce such policies, pNFS Block
+      Layout Types SHOULD NOT be used.
+    </t>
 
+    <t>
+      The implication here is that the security burden has shifted
+      from the storage devices to the client.  It is the responsibilty
+      of the administrator doing the deployment to trust the client
+      implementation. However, this is not a new requirement when it
+      comes to SAN protocols, the client is expected to provide
+      block-based protection.
+    </t>
+
+    <t>
+      <list style='format (%d)'>
         <t>
       Similarly, SAN disk arrays and SAN protocols typically are not
       able to validate NFS locks that apply to file regions.  For
@@ -71,13 +84,6 @@
       ensure that the readable layout is used only to service read
       requests, and not to allow writes to the existing parts of the
       file.
-        </t>
-
-        <t>
-   Since block/volume storage systems are generally not capable of
-   enforcing such file-based security, in environments where pNFS
-   clients cannot be trusted to enforce such policies, pNFS block/volume
-   storage layouts SHOULD NOT be used.
         </t>
 
         <t>
