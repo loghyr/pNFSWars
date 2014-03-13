@@ -4,46 +4,49 @@
 <section anchor="sec:fencing" title="Implementations in Existing Layout Types">
   <section anchor="sec:fencing:files" title="File Layout Type">
     <t>
-      <list style='format (%d)'>
+      Not suprisingly, the File Layout Type comes closest to the
+      normal semantics of NFSv4.1. In particular, the stateid used
+      for I/O MUST have the same effect and be subject to
+      the same validation on a data server as it would if the I/O was being
+      performed on the metadata server itself in the absence of pNFS.
+    </t>
+
+    <t>
+      And while for most implementations the storage devices
+      can do the following validations:
+
+      <list style='symbols'>
         <t>
-          DS SHOULD validate that client holds a valid layout.
+          client holds a valid layout,
         </t>
         <t>
-          DS SHOULD validate iomode.
+          client I/O matches the iomode,
         </t>
         <t>
-          DS SHOULD validate byte ranges.
-        </t>
-        <t>
-   The stateid used for I/O MUST have the same effect and be subject to
-   the same validation on a data server as it would if the I/O was being
-   performed on the metadata server itself in the absence of pNFS.
-        </t>
-        <t>
-   Fencing works as follows.  As described in Section 13.1, in COMPOUND
-   procedure requests to the data server, the data filehandle provided
-   by the PUTFH operation and the stateid in the READ or WRITE operation
-   are used to ensure that the client has a valid layout for the I/O
-   being performed; if it does not, the I/O is rejected with
-   NFS4ERR_PNFS_NO_LAYOUT.  The server can simply check the stateid and,
-   additionally, make the data filehandle stale if the layout specified
-   a data filehandle that is different from the metadata server's
-   filehandle for the file (see the nfl_fh_list description in
-   Section 13.3).
-        </t>
-        <t>
-   The NFSv4.1 file layout type MUST adhere to the security
-   considerations outlined in Section 12.9.  NFSv4.1 data servers MUST
-   make all of the required access checks on each READ or WRITE I/O as
-   determined by the NFSv4.1 protocol.  If the metadata server would
-   deny a READ or WRITE operation on a file due to its ACL, mode
-   attribute, open access mode, open deny mode, mandatory byte-range
-   lock state, or any other attributes and state, the data server MUST
-   also deny the READ or WRITE operation.  This impacts the control
-   protocol and the propagation of state from the metadata server to the
-   data servers; see Section 13.9.2 for more details.
+          client does not go out of the byte ranges,
         </t>
       </list>
+
+      these are each presented as a SHOULD and not a MUST. However,
+      it is just these layout specific checks that are optional, not
+      the normal file access semantics. The storage devices MUST
+      make all of the required access checks on each READ or WRITE I/O as
+      determined by the NFSv4.1 protocol.  If the metadata server would
+      deny a READ or WRITE operation on a file due to its ACL, mode
+      attribute, open access mode, open deny mode, mandatory byte-range
+      lock state, or any other attributes and state, the storage device MUST
+      also deny the READ or WRITE operation. And note that while the
+      NFSv4.1 protocol does not mandate export access checks based on
+      the client's IP address, if the metadata server implements such a
+      policy, then that counts as such state as outlined above.
+    </t>
+
+    <t>
+      As the data filehandle provided
+      by the PUTFH operation and the stateid in the READ or WRITE operation
+      are used to ensure that the client has a valid layout for the I/O
+      being performed, the client can be fenced off for access to a specific
+      file via the invalidation of either key.
     </t>
   </section>
 
