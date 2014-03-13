@@ -191,6 +191,82 @@
     <t>
       <list style='format (%d)'>
         <t>
+          The object-based metadata server should recall outstanding layouts in
+   the following cases: When the file's security policy changes, i.e., Access Control
+      Lists (ACLs) or permission mode bits are set.
+        </t>
+        <t>
+   The metadata server enforces the file access-control policy at
+   LAYOUTGET time.  The client should use suitable authorization
+   credentials for getting the layout for the requested iomode (READ or
+   RW) and the server verifies the permissions and ACL for these
+   credentials, possibly returning NFS4ERR_ACCESS if the client is not
+   allowed the requested iomode.  If the LAYOUTGET operation succeeds
+   the client receives, as part of the layout, a set of object
+   capabilities allowing it I/O access to the specified objects
+   corresponding to the requested iomode.  When the client acts on I/O
+   operations on behalf of its local users, it MUST authenticate and
+   authorize the user by issuing respective OPEN and ACCESS calls to the
+   metadata server, similar to having NFSv4 data delegations.  If access
+   is allowed, the client uses the corresponding (READ or RW)
+   capabilities to perform the I/O operations at the object storage
+   devices.  When the metadata server receives a request to change a
+   file's permissions or ACL, it SHOULD recall all layouts for that file
+   and it MUST change the capability version attribute on all objects
+   comprising the file to implicitly invalidate any outstanding
+   capabilities before committing to the new permissions and ACL.  Doing
+   this will ensure that clients re-authorize their layouts according to
+   the modified permissions and ACL by requesting new layouts.
+   Recalling the layouts in this case is courtesy of the server intended
+   to prevent clients from getting an error on I/Os done after the
+   capability version changed.
+        </t>
+        <t>
+   Since capabilities are tied to layouts, and since they are used to
+   enforce access control, when the file ACL or mode changes the
+   outstanding capabilities MUST be revoked to enforce the new access
+   permissions.  The server SHOULD recall layouts to allow clients to
+   gracefully return their capabilities before the access permissions
+   change.
+        </t>
+        <t>
+   At any time, the metadata server may invalidate all outstanding
+   capabilities on an object by changing its POLICY ACCESS TAG
+   attribute.  The value of the POLICY ACCESS TAG is part of a
+   capability, and it must match the state of the object attribute.  If
+   they do not match, the OSD rejects accesses to the object with the
+   sense key set to ILLEGAL REQUEST and an additional sense code set to
+   INVALID FIELD IN CDB.  When a client attempts to use a capability and
+   is rejected this way, it should issue a LAYOUTCOMMIT for the object
+   and specify PNFS_OSD_BAD_CRED in the olr_ioerr_report parameter.  The
+   client may elect to issue a compound LAYOUTRETURN/LAYOUTGET (or
+   LAYOUTCOMMIT/LAYOUTRETURN/LAYOUTGET) to attempt to fetch a refreshed
+   set of capabilities.
+   <vspace blankLines="1"/>
+   The metadata server may elect to change the access policy tag on an
+   object at any time, for any reason (with the understanding that there
+   is likely an associated performance penalty, especially if there are
+   outstanding layouts for this object).  The metadata server MUST
+   revoke outstanding capabilities when any one of the following occurs:
+   <vspace blankLines="1"/>
+   o  the permissions on the object change,
+   <vspace blankLines="1"/>
+   o  a conflicting mandatory byte-range lock is granted, or
+   <vspace blankLines="1"/>
+   o  a layout is revoked and reassigned to another client.
+   <vspace blankLines="1"/>
+   A pNFS client will typically hold one layout for each byte range for
+   either READ or READ/WRITE.  The client's credentials are checked by
+   the metadata server at LAYOUTGET time and it is the client's
+   responsibility to enforce access control among multiple users
+   accessing the same file.  It is neither required nor expected that
+   the pNFS client will obtain a separate layout for each user accessing
+     shared object.  The client SHOULD use OPEN and ACCESS calls to
+   check user permissions when performing I/O so that the server's
+   access control policies are correctly enforced.  The result of the
+   ACCESS operation may be cached while the client holds a valid layout
+   as the server is expected to recall layouts when the file's access
+   permissions or ACL change.
         </t>
       </list>
     </t>

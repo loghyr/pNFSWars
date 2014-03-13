@@ -2,14 +2,21 @@
 <!-- Copyright (C) The Internet Society (2014) -->
 
 <section anchor="sec:control" title="The Control Protocol">
+  <t>
+    In Section 12.2.6 of <xref target='RFC5661' />, the control
+    protocol is introduced. There is no specification of a control
+    protocol, and indeed there need not be such a protocol in use
+    for any given implementation, but a set of requirements
+    are provided to describe the interaction between the metadata server
+    and the storage device. In terms of writing a new Layout Type,
+    the document MUST show how it meets these requirements, especially
+    with respect to the security implications.
+  </t>
+
   <section anchor="sec:control:req" title="Protocol Requirements">
     <t>
-      In Section 12.2.6 of <xref target='RFC5661' />, the control
-      protocol is introduced. There is no specification of a control
-      protocol, and indeed there need not be such a protocol in use
-      for any given implementation, but a set of requirements
-      are provided to describe the interaction between the metadata server
-      and the storage device, The broad requirements of such interactions are:
+      The broad requirements of such interactions between the metadata
+      server and the storage devices are:
 
       <list style='format (%d)'>
         <t>
