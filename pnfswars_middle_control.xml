@@ -47,6 +47,8 @@
           immediately, although all changes SHOULD be propagated promptly.
         </t>
       </list>
+
+      <cref anchor='AI2' source='TH'>  Where does locking fit in here?</cref>
     </t>
 
     <t>
