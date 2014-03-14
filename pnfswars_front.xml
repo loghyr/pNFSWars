@@ -2,8 +2,8 @@
 <!-- Copyright (C) The Internet Society (2014) -->
 
 <front>
-    <title abbrev="pNFSWars">
-      Requirement wars: pNFS vs File Layouts
+    <title abbrev="Layout Types">
+      Considerations for a new pNFS Layout Type
     </title>
 
     <author fullname="Thomas Haynes"
@@ -34,7 +34,7 @@
         This document provides guidelines for identifying the fine line
         between the requirements for Network File System (NFS) version 4.1's
         Parallel NFS (pNFS) and those for the pNFS File Layout. Implementors
-        trying to specify new layout types are having difficulty in separating
+        trying to specify new Layout Types are having difficulty in separating
         the two sets of requirements.
       </t>
     </abstract>
