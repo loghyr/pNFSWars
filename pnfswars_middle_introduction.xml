@@ -11,7 +11,7 @@
   </t>
 
   <t>
-    Some implementors have interpretted the text in Sections 12
+    Some implementers have interpreted the text in Sections 12
     ("Parallel NFS (pNFS)") and 13 ("NFSv4.1 as a Storage
     Protocol in pNFS: the File Layout Type") of <xref target='RFC5661' />
     as both being strictly for the File Layout Type. I.e., since
@@ -51,12 +51,17 @@
 
       <t hangText='fencing:'>
         is when the metadata server prevents the client from sending
-        I/O to all storage devices for a specfic file.
+        I/O to all storage devices for a specific file.
       </t>
 
       <t hangText='layout:'>
         is a description of how a file's data is organized on one
         or more storage devices.
+      </t>
+
+      <t hangText='layout iomode:'>
+        describes whether the layout granted to the client is for
+        read or read/write I/O.
       </t>
 
       <t hangText='layout stateid:'>
@@ -82,13 +87,13 @@
 
       <t hangText='Metadata Server (MDS):'>
         is the pNFS server which provides metadata information
-        for a file system object. It also is repsonsible for
+        for a file system object. It also is responsible for
         generating layouts for file system objects.
       </t>
 
       <t hangText='recalling a layout:'>
         is when the metadata server uses a back channel to inform the client
-        that the layout in a gracefull manner. Note that the client
+        that the layout in a graceful manner. Note that the client
         could be able to flush any writes, etc. before replying to
         the metadata server.
       </t>

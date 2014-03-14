@@ -5,6 +5,6 @@
   <t>
     The metadata server MUST be able to fence off a client's access to a file
     stored on a storage device. When it revokes the layout, the client's access
-    must be terminated.
+    MUST be terminated at the storage devices.
   </t>
 </section>

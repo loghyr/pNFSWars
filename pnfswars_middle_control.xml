@@ -22,7 +22,7 @@
         <t>
           NFSv4.1 clients MUST be able to access a file directly through the
           metadata server and not the storage device. I.e., the metadata server must be able to retrieve
-          the data from the consituent storage devices and present it back to
+          the data from the constituent storage devices and present it back to
           the client via normal NFSv4.1 operations. Whether the metadata server
           allows access over other protocols is strictly an implementation
           detail.
@@ -93,11 +93,11 @@
   <section anchor="sec:control:edits" title="Editorial Requirements">
     <t>
       In addition to these protocol requirements, there are two editorial requirements for drafts
-      that present a new Layout Type. There MUST be sections which decribe:
+      that present a new Layout Type. There MUST be sections which describe:
 
       <list style='format (%d)'>
         <t>
-          The apporach the new Layout Type takes towards fencing clients once the
+          The approach the new Layout Type takes towards fencing clients once the
           metadata server determines that the layout is revoked.
         </t>
 
@@ -107,7 +107,7 @@
       </list>
 
       While these could be envisioned as one section in that the fencing issue might be
-      the only security issue, it is recommended to deal with them seperably.
+      the only security issue, it is recommended to deal with them separably.
     </t>
   </section>
 </section>

@@ -1,0 +1,31 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section anchor="sec:wrapup" title="Summary">
+  <t>
+    In the three published Layout Types, the burden of enforcing
+    the security of NFSv4.1 can fall to either the storage devices
+    (Files), the client (Blocks), or the metadata server (Objects).
+    Such decisions seem to be forced by the native capabilities of
+    the storage devices - if a real control protocol can be implemented,
+    then the burden can be shifted primarily to the storage devices.
+  </t>
+
+  <t>
+    But as we have seen, the control protocol is actually a set of
+    requirements. And as new Layout Types are published, the enclosing
+    documents minimally MUST address:
+
+    <list style='format (%d)'>
+      <t>
+        The fencing of clients after a layout is revoked.
+      </t>
+
+      <t>
+        The security implications of the native capabilities of the
+        storage devices with respect to the requirements of the
+        NFSv4.1 security model.
+      </t>
+    </list>
+  </t>
+</section>
