@@ -23,7 +23,7 @@
 
   <t>
     As a consequence, new internet drafts (see <xref target='FlexFiles' />
-    and <xref target='Lustre' />) may be struggle to meet the requirements
+    and <xref target='Lustre' />) may struggle to meet the requirements
     to be a pNFS Layout Type. This document clarifies what are the
     Layout Type independent requirements placed on all Layout Types,
     whether one of the original three or any new variant.
@@ -94,7 +94,7 @@
       <t hangText='recalling a layout:'>
         is when the metadata server uses a back channel to inform the client
         that the layout in a graceful manner. Note that the client
-        could be able to flush any writes, etc. before replying to
+        could be able to flush any writes, etc., before replying to
         the metadata server.
       </t>
 
@@ -114,7 +114,6 @@
       <t hangText='storage device:'>
         is another term used interchangeably with data server.
       </t>
-
     </list>
   </t>
 

@@ -40,8 +40,8 @@
 
         <t>
           The metadata server and the storage devices MUST agree on 
-          attributes like modify time, the change attribute, and the end-of-
-          file (EOF) position.
+          attributes like modify time, the change attribute, and
+          the end-of-file (EOF) position.
           <vspace blankLines="1"/>
           Note that "agree" here means that some state changes need not be propagated
           immediately, although all changes SHOULD be propagated promptly.
