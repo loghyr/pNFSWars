@@ -50,13 +50,15 @@
       </t>
 
       <t hangText='fencing:'>
-        is when the metadata server prevents the client from sending
-        I/O to all storage devices for a specific file.
+        is when the metadata server prevents the storage devices
+        from processing I/O from a specific client to a specific file.
       </t>
 
       <t hangText='layout:'>
-        is a description of how a file's data is organized on one
-        or more storage devices.
+        informs a client of which storage devices it needs to communicate
+        with (and over which protocol) to perform I/O on a file. The
+        layout might also provide some hints about how the storage
+        is physically organized.
       </t>
 
       <t hangText='layout iomode:'>
@@ -88,12 +90,13 @@
       <t hangText='Metadata Server (MDS):'>
         is the pNFS server which provides metadata information
         for a file system object. It also is responsible for
-        generating layouts for file system objects.
+        generating layouts for file system objects. Note that
+        the MDS is responsible for directory-based operations.
       </t>
 
       <t hangText='recalling a layout:'>
         is when the metadata server uses a back channel to inform the client
-        that the layout in a graceful manner. Note that the client
+        that the layout is to be returned in a graceful manner. Note that the client
         could be able to flush any writes, etc., before replying to
         the metadata server.
       </t>
@@ -112,10 +115,32 @@
       </t>
 
       <t hangText='storage device:'>
-        is another term used interchangeably with data server.
+        is another term used almost interchangeably with data server. See
+        <xref target='sec:intro:diff' /> for the nuances between the two.
       </t>
     </list>
   </t>
+
+  <section anchor='sec:intro:diff' title="Difference Between a Data Server and a Storage Device">
+    <t>
+      We defined a data server as a pNFS server, which implies that it
+      can utilize the NFSv4.1 protocol to communicate with the client.
+      As such, only the File Layout Type would currently meet this
+      requirement. The more generic concept is a storage device, which
+      can use any protocol to communicate with the client. The requirements
+      for a storage device to act together with the metadata server
+      to provide data to a client are that there is a Layout Type
+      specification for the given protocol and that the metadata server
+      has granted a layout to the client. Note that nothing precludes
+      there being multiple supported Layout Types (i.e., protocols)
+      between a metadata server, storage devices, and client.
+    </t>
+
+    <t>
+      As storage device is the more encompassing terminology, this document
+      utilizes it over data server.
+    </t>
+  </section>
 
   <section title="Requirements Language">
     <t>

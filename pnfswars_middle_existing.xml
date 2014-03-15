@@ -84,11 +84,11 @@
       if the metadata server uses a layout iomode for reading to
       enforce a mandatory read-only lock, then the client has to honor
       that intent by not sending WRITEs to the storage devices. The basic
-      issue here is that once the client has access to the storage device
-      it is able to write willy-nilly, even outside of the range of the
-      layout.
-
-      <cref anchor='AI1' source='TH'>  Willy-nilly means I want to craft this better!</cref>
+      issue here is that the storage device can be treated as a local dumb disk
+      such that once the client has access to the storage device,
+      it is able to perform either READ or WRITE I/O to the entire
+      storage device. The byte ranges in the layout, any locks, the
+      layout iomode, etc, can only be enforced by the client.
     </t>
 
     <t>

@@ -31,11 +31,12 @@
 
     <abstract>
       <t>
-        This document provides guidelines for identifying the fine line
+        This document provides help in distinguishing 
         between the requirements for Network File System (NFS) version 4.1's
-        Parallel NFS (pNFS) and those for the pNFS File Layout. Implementors
-        trying to specify new Layout Types are having difficulty in separating
-        the two sets of requirements.
+        Parallel NFS (pNFS) and those those specifically directed to the
+        pNFS File Layout. The lack of a clear separation between the two
+        set of requirements may be troublesome for those trying to
+        specify new Layout Types.
       </t>
     </abstract>
 </front>

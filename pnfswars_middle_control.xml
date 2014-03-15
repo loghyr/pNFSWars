@@ -4,13 +4,14 @@
 <section anchor="sec:control" title="The Control Protocol">
   <t>
     In Section 12.2.6 of <xref target='RFC5661' />, the control
-    protocol is introduced. There is no specification of a control
-    protocol, and indeed there need not be such a protocol in use
-    for any given implementation, but a set of requirements
-    are provided to describe the interaction between the metadata server
-    and the storage device. In terms of writing a new Layout Type,
-    the document MUST show how it meets these requirements, especially
-    with respect to the security implications.
+    protocol is introduced. There have been no specifications
+    for control protocols, and indeed there need not be such
+    a protocol in use for any given implementation. The control
+    protocol is actually a set of requirements provided to
+    describe the interaction between the metadata server and
+    the storage device. When specifying a new Layout Type, the
+    defining document MUST show how it meets these requirements,
+    especially with respect to the security implications.
   </t>
 
   <section anchor="sec:control:req" title="Protocol Requirements">
@@ -21,21 +22,31 @@
       <list style='format (%d)'>
         <t>
           NFSv4.1 clients MUST be able to access a file directly through the
-          metadata server and not the storage device. I.e., the metadata server must be able to retrieve
-          the data from the constituent storage devices and present it back to
-          the client via normal NFSv4.1 operations. Whether the metadata server
-          allows access over other protocols is strictly an implementation
-          detail.
+          metadata server and not the storage device. I.e., the metadata
+          server must be able to retrieve the data from the constituent
+          storage devices and present it back to the client via normal NFSv4.1
+          operations. Whether the metadata server allows access over other
+          protocols (e.g., NFSv3, Server Message Block (SMB), etc) is
+          strictly an implementation choice.
         </t>
 
         <t>
-          The metadata server MUST be able to restrict access to a file on the storage devices
-          when it revokes a layout.
+          The metadata server MUST be able to restrict access to a file
+          on the storage devices when it revokes a layout. The metadata
+          server typically would revoke a layout whenever a client fails
+          to respond to a recall or fails to renew its lease in time. It
+          might also revoke the layout as a means of enforcing a change
+          in state that the storage device cannot directly enforce with
+          the client.
         </t>
 
         <t>
           Storage devices MUST NOT remove NFSv4.1's access controls: ACLs and
           file open modes.
+        </t>
+
+        <t>
+          Locking MUST be respected.
         </t>
 
         <t>
@@ -47,20 +58,21 @@
           immediately, although all changes SHOULD be propagated promptly.
         </t>
       </list>
-
-      <cref anchor='AI2' source='TH'>  Where does locking fit in here?</cref>
     </t>
 
     <t>
       Note that there is no requirement on how these are implemented. While the File Layout
       Type does use the stateid to fence off the client, there is no requirement that
-      other Layout Types use this stateid approach.
+      other Layout Types use this stateid approach. But the other Layout Types
+      MUST document how the client, metadata server, and storage devices interact
+      to meet these requirements.
     </t>
   </section>
 
   <section anchor="sec:control:nonreq" title="Non-protocol Requirements">
     <t>
-      There are some notable absences from those broad requirements:
+      In gathering the requirements from Section 12 of <xref target='RFC5661' />,
+      there are some which are notable in their absence:
 
       <list style='format (%d)'>
         <t>
@@ -95,7 +107,7 @@
   <section anchor="sec:control:edits" title="Editorial Requirements">
     <t>
       In addition to these protocol requirements, there are two editorial requirements for drafts
-      that present a new Layout Type. There MUST be sections which describe:
+      that present a new Layout Type. At a minimum, the specification needs to address:
 
       <list style='format (%d)'>
         <t>
@@ -110,6 +122,13 @@
 
       While these could be envisioned as one section in that the fencing issue might be
       the only security issue, it is recommended to deal with them separably.
+    </t>
+
+    <t>
+      The specification of the Layout Type should discuss how the client, metadata server,
+      and storage device act together to meet the protocol requirements. I.e., if the storage
+      device cannot enforce mandatory byte-range locks, then how can the metadata
+      server and the client interact with the layout to enforce those locks?
     </t>
   </section>
 </section>
