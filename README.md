@@ -1,5 +1,6 @@
-This draft pulls is Informational in that it desceibes how to split
-the 5661 text on pNFS and File Layouts apart.
+This draft is informational in that it descibes the
+difference between the pNFS Layout semantics and
+the File Layout Type.
 
 http://www.ietf.org/html.charters/nfsv4-charter.html
 http://www.ietf.org/mail-archive/web/nfsv4/index.html
@@ -11,13 +12,9 @@ To compile the XML files into text files:
 1. Install xml2rfc 
    http://xml.resource.org/
 
-   These instructions have been tested with version 1.34pre3
+   These instructions have been tested with version 2
 
-2. Place xml2rfc in your path
-
-   For example, setenv PATH $PATH":/Users/thomas/Documents/ietf/bin/xml2rfc-1.36"
-
-3. Build
+2. Build
 
    > make
 
