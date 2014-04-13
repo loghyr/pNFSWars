@@ -4,10 +4,13 @@
 YEAR=`date +%Y`
 MONTH=`date +%B`
 DAY=`date +%d`
-PREVVERS=01
-VERS=02
-BASEDOC=draft-haynes-nfsv4-layout-types
+PREVVERS=02
+VERS=03
+
 XML2RFC=xml2rfc
+
+BASEDOC=draft-haynes-nfsv4-layout-types
+DOC_PREFIX=pnfswars
 
 autogen/%.xml : %.x
 	@mkdir -p autogen
@@ -66,39 +69,39 @@ $(BASEDOC)-$(VERS).html: $(BASEDOC)-$(VERS).xml
 $(BASEDOC)-$(VERS).nr: $(BASEDOC)-$(VERS).xml
 	${XML2RFC} --nroff $(BASEDOC)-$(VERS).xml -o $@
 
-pnfswars_front_autogen.xml: pnfswars_front.xml Makefile
-	sed -e s/DAYVAR/${DAY}/g -e s/MONTHVAR/${MONTH}/g -e s/YEARVAR/${YEAR}/g < pnfswars_front.xml > pnfswars_front_autogen.xml
+${DOC_PREFIX}_front_autogen.xml: ${DOC_PREFIX}_front.xml Makefile
+	sed -e s/DAYVAR/${DAY}/g -e s/MONTHVAR/${MONTH}/g -e s/YEARVAR/${YEAR}/g < ${DOC_PREFIX}_front.xml > ${DOC_PREFIX}_front_autogen.xml
 
-pnfswars_rfc_start_autogen.xml: pnfswars_rfc_start.xml Makefile
-	sed -e s/VERSIONVAR/${VERS}/g < pnfswars_rfc_start.xml > pnfswars_rfc_start_autogen.xml
+${DOC_PREFIX}_rfc_start_autogen.xml: ${DOC_PREFIX}_rfc_start.xml Makefile
+	sed -e s/VERSIONVAR/${VERS}/g < ${DOC_PREFIX}_rfc_start.xml > ${DOC_PREFIX}_rfc_start_autogen.xml
 
 AUTOGEN =	\
-		pnfswars_front_autogen.xml \
-		pnfswars_rfc_start_autogen.xml
+		${DOC_PREFIX}_front_autogen.xml \
+		${DOC_PREFIX}_rfc_start_autogen.xml
 
-START_PREGEN = pnfswars_rfc_start.xml
-START=	pnfswars_rfc_start_autogen.xml
-END=	pnfswars_rfc_end.xml
+START_PREGEN = ${DOC_PREFIX}_rfc_start.xml
+START=	${DOC_PREFIX}_rfc_start_autogen.xml
+END=	${DOC_PREFIX}_rfc_end.xml
 
-FRONT_PREGEN = pnfswars_front.xml
+FRONT_PREGEN = ${DOC_PREFIX}_front.xml
 
 IDXMLSRC_BASE = \
-	pnfswars_middle_start.xml \
-	pnfswars_middle_introduction.xml \
-	pnfswars_middle_control.xml \
-	pnfswars_middle_existing.xml \
-	pnfswars_middle_wrapup.xml \
-	pnfswars_middle_security.xml \
-	pnfswars_middle_iana.xml \
-	pnfswars_middle_end.xml \
-	pnfswars_back_front.xml \
-	pnfswars_back_references.xml \
-	pnfswars_back_acks.xml \
-	pnfswars_back_back.xml
+	${DOC_PREFIX}_middle_start.xml \
+	${DOC_PREFIX}_middle_introduction.xml \
+	${DOC_PREFIX}_middle_control.xml \
+	${DOC_PREFIX}_middle_existing.xml \
+	${DOC_PREFIX}_middle_wrapup.xml \
+	${DOC_PREFIX}_middle_security.xml \
+	${DOC_PREFIX}_middle_iana.xml \
+	${DOC_PREFIX}_middle_end.xml \
+	${DOC_PREFIX}_back_front.xml \
+	${DOC_PREFIX}_back_references.xml \
+	${DOC_PREFIX}_back_acks.xml \
+	${DOC_PREFIX}_back_back.xml
 
-IDCONTENTS = pnfswars_front_autogen.xml $(IDXMLSRC_BASE)
+IDCONTENTS = ${DOC_PREFIX}_front_autogen.xml $(IDXMLSRC_BASE)
 
-IDXMLSRC = pnfswars_front.xml $(IDXMLSRC_BASE)
+IDXMLSRC = ${DOC_PREFIX}_front.xml $(IDXMLSRC_BASE)
 
 draft-tmp.xml: $(START) Makefile $(END) $(IDCONTENTS)
 		rm -f $@ $@.tmp
