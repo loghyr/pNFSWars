@@ -39,6 +39,12 @@
         the metadata server and the storage devices.
       </t>
 
+      <t hangText='(file) data:'>
+        is that part of the file system object which describes
+        the payload and not the object. E.g., it is the file
+        contents.
+      </t>
+
       <t hangText='Data Server (DS):'>
         is one of the pNFS servers which provide the contents
         of a file system object which is a regular file. Depending
@@ -81,7 +87,7 @@
         the file data on the underlying storage devices.
       </t>
 
-      <t hangText='metadata:'>
+      <t hangText='(file) metadata:'>
         is that part of the file system object which describes
         the object and not the payload. E.g., it could be the
         time since last modification, access, etc.
