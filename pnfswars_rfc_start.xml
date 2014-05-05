@@ -50,5 +50,6 @@
 <rfc
     category="info"
     ipr="trust200902"
+    updates="5661"
     docName="draft-haynes-nfsv4-layout-types-VERSIONVAR.txt" >
 

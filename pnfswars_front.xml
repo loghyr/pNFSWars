@@ -3,7 +3,7 @@
 
 <front>
     <title abbrev="Layout Types">
-      Considerations for a New pNFS Layout Type
+      Requirements for pNFS Layout Types
     </title>
 
     <author fullname="Thomas Haynes"
@@ -35,8 +35,8 @@
         between the requirements for Network File System (NFS) version 4.1's
         Parallel NFS (pNFS) and those those specifically directed to the
         pNFS File Layout. The lack of a clear separation between the two
-        set of requirements may be troublesome for those trying to
-        specify new Layout Types.
+        set of requirements has been troublesome for those specifying and
+        evaluating new Layout Types.
       </t>
     </abstract>
 </front>
