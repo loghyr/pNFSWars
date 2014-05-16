@@ -4,12 +4,12 @@
 YEAR=`date +%Y`
 MONTH=`date +%B`
 DAY=`date +%d`
-PREVVERS=02
-VERS=03
+PREVVERS=00
+VERS=00
 
 XML2RFC=xml2rfc
 
-BASEDOC=draft-haynes-nfsv4-layout-types
+BASEDOC=draft-ietf-nfsv4-layout-types
 DOC_PREFIX=pnfswars
 
 autogen/%.xml : %.x
