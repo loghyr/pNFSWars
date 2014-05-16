@@ -104,13 +104,16 @@
 
     <reference anchor='FlexFiles'>
       <front>
-        <title>Parallel NFS (pNFS) Flexible Files Layout</title>
+        <title>Parallel NFS (pNFS) Flexible File Layout</title>
         <author initials="B." surname="Halevy" fullname="B. Halevy">
           <organization>Primary Data</organization>
         </author>
-        <date year="2013" month="October" />
+        <author initials="T." surname="Haynes" fullname="T. Haynes">
+          <organization>Primary Data</organization>
+        </author>
+        <date year="2014" month="May" />
       </front>
-      <seriesInfo name="draft-bhalevy-nfsv4-flex-files-01" value="(Work In Progress)"/>
+      <seriesInfo name="draft-bhalevy-nfsv4-flex-files-03" value="(Work In Progress)"/>
     </reference>
 
 
