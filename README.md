@@ -10,9 +10,14 @@ NOTE: The drafts contained here may change after it is posted to the IETF site. 
 To compile the XML files into text files:
 
 1. Install xml2rfc 
-   http://xml.resource.org/
+   Check with http://xml.resource.org/, but basically:
 
-   These instructions have been tested with version 2
+#
+# Install xml2rfc
+#
+curl -O https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+pip install xml2rfc
 
 2. Build
 
