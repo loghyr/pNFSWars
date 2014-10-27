@@ -97,9 +97,9 @@
         <author initials="P." surname="Tao" fullname="P. Tao">
           <organization>EMC</organization>
         </author>
-        <date year="2013" month="November" />
+        <date year="2014" month="April" />
       </front>
-      <seriesInfo name="draft-faibish-nfsv4-pnfs-lustre-layout-06" value="(Work In Progress)"/>
+      <seriesInfo name="draft-faibish-nfsv4-pnfs-lustre-layout-07" value="(Work In Progress)"/>
     </reference>
 
     <reference anchor='FlexFiles'>
@@ -115,6 +115,5 @@
       </front>
       <seriesInfo name="draft-ietf-nfsv4-flex-files-02" value="(Work In Progress)"/>
     </reference>
-
 
 </references>
