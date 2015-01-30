@@ -48,7 +48,7 @@
 <!-- end of list of processing instructions -->
 
 <rfc
-    category="info"
+    category="std"
     ipr="trust200902"
     updates="5661"
     docName="draft-ietf-nfsv4-layout-types-VERSIONVAR.txt" >
