@@ -2,23 +2,64 @@
 <!-- Copyright (C) The Internet Society (2014) -->
 
 <section anchor="sec:intro" title="Introduction">
+
   <t>
-    Both Parallel Network File System (pNFS) and the file layout type
-    were defined in the Network File System (NFS) version 4.1
-    protocol specification, <xref target='RFC5661' />. The block
+    The concept of layout type has a central role in the definition
+    and implementation of Parallel Network File System (pNFS).
+    Clients and servers implementing different layout types behave
+    differently in many ways while conforming to the overall pNFS
+    framework defined in <xref target='RFC5661' /> and this document.
+    Layout types may differ in:
+
+    <list style='symbols'>
+      <t>
+        The method used to do I/O operations directed to data storage devices.
+      </t>
+
+      <t>
+        The requirements for communication between the metadata server (MDS) and
+        the data storage devices.
+      </t>
+
+      <t>
+        The means used to ensure that I/O requests
+        are only processed when the client holds an appropriate layout.
+      </t>
+
+      <t>
+        The format and interpretation of nominally opaque data fields in
+        pNFS-related NFSv4.x data structures.
+      </t>
+    </list>
+  </t>
+
+  <t>
+    Such matters are defined in a standards-track layout type
+    specification.  Except for the files layout type, which was
+    defined in Section 13 of <xref target='RFC5661' />, existing
+    layout types are defined in their own standards-track documents
+    and it is anticipated that new layout type will be defined in
+    similar documents.
+  </t>
+
+  <t>
+    The file layout type
+    was defined in the Network File System (NFS) version 4.1
+    protocol specification <xref target='RFC5661' />. The block
     layout type was defined in <xref target='RFC5663' /> and the object
     layout type was in turn defined in <xref target='RFC5664' />.
   </t>
 
   <t>
     Some implementers have interpreted the text in Sections 12
-    ("Parallel NFS (pNFS)") and 13 ("NFSv4.1 as a Storage
-    Protocol in pNFS: the File Layout Type") of <xref target='RFC5661' />
-    as both being strictly for the file layout type. Because
-    Section 13 was not covered in a separate RFC like those for
-    both the block and object layout types, there had been some confusion
-    as to the responsibilities of both the metadata server (MDS) and
-    the data servers (DS) which were laid out in Section 12.
+    ("Parallel NFS (pNFS)") and 13 ("NFSv4.1 as a Storage Protocol
+    in pNFS: the File Layout Type") of <xref target='RFC5661' />
+    as both being strictly for the file layout type. Because Section
+    13 was not covered in a separate standards-track document like
+    those for both the block and object layout types, there had
+    been some confusion as to the responsibilities of both the
+    metadata server and the data servers (DS) which were laid out
+    in Section 12.
   </t>
 
   <t>
