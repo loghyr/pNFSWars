@@ -106,14 +106,13 @@
       <front>
         <title>Parallel NFS (pNFS) Flexible File Layout</title>
         <author initials="B." surname="Halevy" fullname="B. Halevy">
-          <organization>Primary Data</organization>
         </author>
         <author initials="T." surname="Haynes" fullname="T. Haynes">
           <organization>Primary Data</organization>
         </author>
-        <date year="2014" month="October" />
+        <date year="2016" month="May" />
       </front>
-      <seriesInfo name="draft-ietf-nfsv4-flex-files-02" value="(Work In Progress)"/>
+      <seriesInfo name="draft-ietf-nfsv4-flex-files-08" value="(Work In Progress)"/>
     </reference>
 
 </references>
