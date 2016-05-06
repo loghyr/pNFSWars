@@ -31,14 +31,14 @@
 
     <abstract>
       <t>
-	This document provides help in distinguishing between the
-	requirements for Network File System (NFS) version 4.1's
-	Parallel NFS (pNFS) and those those specifically directed
-	to the pNFS File Layout. The lack of a clear separation
-	between the two set of requirements has been troublesome
-	for those specifying and evaluating new Layout Types.
-        As this document clarifies RFC5661, it effectively updates
-        RFC5661.
+        This document defines the requirements for layout types in
+        Network File System (NFS) version 4.1's Parallel NFS (pNFS).
+        It also clearly distinguishes between the requirements for
+        pNFS and those specifically directed to the pNFS file layout.
+        The lack of a clear separation between the two set of
+        requirements has been troublesome for those specifying and
+        evaluating new Layout Types.  In this regard, this
+        document effectively updates RFC5661.
       </t>
     </abstract>
 </front>
