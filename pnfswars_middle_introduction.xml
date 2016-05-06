@@ -14,9 +14,9 @@
     Some implementers have interpreted the text in Sections 12
     ("Parallel NFS (pNFS)") and 13 ("NFSv4.1 as a Storage
     Protocol in pNFS: the File Layout Type") of <xref target='RFC5661' />
-    as both being strictly for the file layout type. I.e., since
+    as both being strictly for the file layout type. Because
     Section 13 was not covered in a separate RFC like those for
-    both the block and object layout types, there is some confusion
+    both the block and object layout types, there had been some confusion
     as to the responsibilities of both the metadata server (MDS) and
     the data servers (DS) which were laid out in Section 12.
   </t>
@@ -24,7 +24,7 @@
   <t>
     As a consequence, new internet drafts (see <xref target='FlexFiles' />
     and <xref target='Lustre' />) may struggle to meet the requirements
-    to be a pNFS layout type. This document clarifies what are the
+    to be a pNFS layout type. This document specifies the
     layout type independent requirements placed on all layout types,
     whether one of the original three or any new variant.
   </t>
