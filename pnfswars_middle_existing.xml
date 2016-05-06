@@ -4,7 +4,7 @@
 <section anchor="sec:fencing" title="Implementations in Existing Layout Types">
   <section anchor="sec:fencing:files" title="File Layout Type">
     <t>
-      Not surprisingly, the File Layout Type comes closest to the
+      Not surprisingly, the file layout type comes closest to the
       normal semantics of NFSv4.1. In particular, the stateid used
       for I/O MUST have the same effect and be subject to
       the same validation on a data server as it would if the I/O was being
@@ -52,7 +52,7 @@
 
   <section anchor="sec:fencing:blocks" title="Block Layout Type">
     <t>
-      With the Block Layout Type, the storage devices are not guaranteed
+      With the block layout type, the storage devices are not guaranteed
       to be able to enforce file-based security.
       Typically, storage area network (SAN) disk arrays and SAN
       protocols provide access control mechanisms (e.g., Logical Unit
@@ -63,8 +63,8 @@
       applicable to protocols that access such storage directly.
       As such, <xref target='RFC5663' />
       is very careful to define that in environments where pNFS
-      clients cannot be trusted to enforce such policies, pNFS Block
-      Layout Types SHOULD NOT be used.
+      clients cannot be trusted to enforce such policies, pNFS block
+      layout types SHOULD NOT be used.
     </t>
 
     <t>
@@ -92,7 +92,7 @@
     </t>
 
     <t>
-      While the Block Layout Type does support client fencing upon
+      While the block layout type does support client fencing upon
       revoking a layout, the above restrictions come into play again:
       the granularity of the fencing can only be at the host/logical-unit
       level. Thus, if one of a client's layouts is unilaterally revoked
@@ -105,7 +105,7 @@
 
   <section anchor="sec:fencing:objects" title="Object Layout Type">
     <t>
-      The Object Layout Type focuses security checks to occur during
+      The object layout type focuses security checks to occur during
       the allocation of the layout. The client will typically ask
       for a layout for each byte-range of either READ or READ/WRITE.
       At that time, the metadata server should verify permissions

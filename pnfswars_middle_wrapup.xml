@@ -3,9 +3,9 @@
 
 <section anchor="sec:wrapup" title="Summary">
   <t>
-    In the three published Layout Types, the burden of enforcing
+    In the three published layout types, the burden of enforcing
     the security of NFSv4.1 can fall to either the storage devices
-    (Files), the client (Blocks), or the metadata server (Objects).
+    (files), the client (blocks), or the metadata server (objects).
     Such decisions seem to be forced by the native capabilities of
     the storage devices - if a real control protocol can be implemented,
     then the burden can be shifted primarily to the storage devices.
@@ -13,7 +13,7 @@
 
   <t>
     But as we have seen, the control protocol is actually a set of
-    requirements. And as new Layout Types are published, the enclosing
+    requirements. And as new layout types are published, the enclosing
     documents minimally MUST address:
 
     <list style='format (%d)'>

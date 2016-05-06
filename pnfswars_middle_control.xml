@@ -9,7 +9,7 @@
     a protocol in use for any given implementation. The control
     protocol is actually a set of requirements provided to
     describe the interaction between the metadata server and
-    the storage device. When specifying a new Layout Type, the
+    the storage device. When specifying a new layout type, the
     defining document MUST show how it meets these requirements,
     especially with respect to the security implications.
   </t>
@@ -61,9 +61,9 @@
     </t>
 
     <t>
-      Note that there is no requirement on how these are implemented. While the File Layout
-      Type does use the stateid to fence off the client, there is no requirement that
-      other Layout Types use this stateid approach. But the other Layout Types
+      Note that there is no requirement on how these are implemented. While the file layout
+      type does use the stateid to fence off the client, there is no requirement that
+      other layout types use this stateid approach. But the other layout types
       MUST document how the client, metadata server, and storage devices interact
       to meet these requirements.
     </t>
@@ -89,7 +89,7 @@
           of LAYOUTIOMODE4_READ, then if the client attempts to write, the I/O may be rejected.
           <vspace blankLines="1"/>
           While storage devices should make such checks on the layout iomode, <xref target='RFC5661' />
-          does not mandate that all Layout Types have to make such checks.
+          does not mandate that all layout types have to make such checks.
         </t>
 
         <t>
@@ -99,7 +99,7 @@
     </t>
 
     <t>
-      Of these, the first two are of concern to this draft and Layout Types SHOULD honor
+      Of these, the first two are of concern to this draft and layout types SHOULD honor
       them if at all possible,
     </t>
   </section>
@@ -107,16 +107,16 @@
   <section anchor="sec:control:edits" title="Editorial Requirements">
     <t>
       In addition to these protocol requirements, there are two editorial requirements for drafts
-      that present a new Layout Type. At a minimum, the specification needs to address:
+      that present a new layout type. At a minimum, the specification needs to address:
 
       <list style='format (%d)'>
         <t>
-          The approach the new Layout Type takes towards fencing clients once the
+          The approach the new layout type takes towards fencing clients once the
           metadata server determines that the layout is revoked.
         </t>
 
         <t>
-          The security considerations of the new Layout Type.
+          The security considerations of the new layout type.
         </t>
       </list>
 
@@ -125,7 +125,7 @@
     </t>
 
     <t>
-      The specification of the Layout Type should discuss how the client, metadata server,
+      The specification of the layout type should discuss how the client, metadata server,
       and storage device act together to meet the protocol requirements. I.e., if the storage
       device cannot enforce mandatory byte-range locks, then how can the metadata
       server and the client interact with the layout to enforce those locks?

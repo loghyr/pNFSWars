@@ -3,29 +3,29 @@
 
 <section anchor="sec:intro" title="Introduction">
   <t>
-    Both Parallel Network File System (pNFS) and the File Layout Type
+    Both Parallel Network File System (pNFS) and the file layout type
     were defined in the Network File System (NFS) version 4.1
-    protocol specification, <xref target='RFC5661' />. The Block
-    Layout Type was defined in <xref target='RFC5663' /> and the Object
-    Layout Type was in turn defined in <xref target='RFC5664' />.
+    protocol specification, <xref target='RFC5661' />. The block
+    layout type was defined in <xref target='RFC5663' /> and the object
+    layout type was in turn defined in <xref target='RFC5664' />.
   </t>
 
   <t>
     Some implementers have interpreted the text in Sections 12
     ("Parallel NFS (pNFS)") and 13 ("NFSv4.1 as a Storage
     Protocol in pNFS: the File Layout Type") of <xref target='RFC5661' />
-    as both being strictly for the File Layout Type. I.e., since
+    as both being strictly for the file layout type. I.e., since
     Section 13 was not covered in a separate RFC like those for
-    both the Block and Object Layout Types, there is some confusion
-    as to the responsibilities of both the Metadata Server (MDS) and
-    the Data Servers (DS) which were laid out in Section 12.
+    both the block and object layout types, there is some confusion
+    as to the responsibilities of both the metadata server (MDS) and
+    the data servers (DS) which were laid out in Section 12.
   </t>
 
   <t>
     As a consequence, new internet drafts (see <xref target='FlexFiles' />
     and <xref target='Lustre' />) may struggle to meet the requirements
-    to be a pNFS Layout Type. This document clarifies what are the
-    Layout Type independent requirements placed on all Layout Types,
+    to be a pNFS layout type. This document clarifies what are the
+    layout type independent requirements placed on all layout types,
     whether one of the original three or any new variant.
   </t>
 </section>
@@ -51,7 +51,7 @@
         on the layout, there might be one or more data servers over which
         the data is striped. Note that while the metadata server is strictly
         accessed over the NFSv4.1 protocol, depending on the
-        Layout Type, the data server could be accessed via any protocol
+        layout type, the data server could be accessed via any protocol
         that meets the pNFS requirements.
       </t>
 
@@ -75,13 +75,13 @@
       <t hangText='layout stateid:'>
         is a 128-bit quantity returned by a server that
         uniquely defines the layout state provided by the server
-        for a specific layout that describes a Layout Type and
+        for a specific layout that describes a layout type and
         file (see Section 12.5.2 of <xref target='RFC5661' />).
         Further, Section 12.5.3 describes the difference between
         a layout stateid and a normal stateid.
       </t>
 
-      <t hangText='Layout Type:'>
+      <t hangText='layout type:'>
         describes both the storage protocol used to
         access the data and the aggregation scheme used to lays out
         the file data on the underlying storage devices.
@@ -131,14 +131,14 @@
     <t>
       We defined a data server as a pNFS server, which implies that it
       can utilize the NFSv4.1 protocol to communicate with the client.
-      As such, only the File Layout Type would currently meet this
+      As such, only the file layout type would currently meet this
       requirement. The more generic concept is a storage device, which
       can use any protocol to communicate with the client. The requirements
       for a storage device to act together with the metadata server
-      to provide data to a client are that there is a Layout Type
+      to provide data to a client are that there is a layout type
       specification for the given protocol and that the metadata server
       has granted a layout to the client. Note that nothing precludes
-      there being multiple supported Layout Types (i.e., protocols)
+      there being multiple supported layout types (i.e., protocols)
       between a metadata server, storage devices, and client.
     </t>
 
