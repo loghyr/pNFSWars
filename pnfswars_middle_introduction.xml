@@ -74,26 +74,42 @@
 <section anchor='sec:defs' title='Definitions'>
   <t>
     <list style='hanging'>
+      <t hangText='control communication requirements:'>
+        define for a layout type the details regarding
+        information on layouts, stateids, file metadata, and file
+        data which must be  communicated between the metadata
+        server and the storage devices.
+      </t>
+
       <t hangText='control protocol:'>
-        is a set of requirements for the communication of information
-        on layouts, stateids, file metadata, and file data between
-        the metadata server and the storage devices.
+        defines a particular mechanism that an implementation of a
+        layout type would use to meet the control communication
+        requirement for that layout type.  This need not be a
+        protocol as normally understood.  In some cases the same
+        protocol my be used as a control protocol and data access
+        protocol.
       </t>
 
       <t hangText='(file) data:'>
-        is that part of the file system object which describes
-        the payload and not the object. E.g., it is the file
-        contents.
+        is that part of the file system object which contains
+        the data to read or writen. It is the contents of the object
+        and not the attributes of the object.
       </t>
 
-      <t hangText='Data Server (DS):'>
-        is one of the pNFS servers which provide the contents
-        of a file system object which is a regular file. Depending
-        on the layout, there might be one or more data servers over which
-        the data is striped. Note that while the metadata server is strictly
-        accessed over the NFSv4.1 protocol, depending on the
-        layout type, the data server could be accessed via any protocol
+      <t hangText='data server (DS):'>
+        is a pNFS server which provides the file's data when the file
+        system object is accessed over a file-based protocol.  Note
+        that this usage differs from that in <xref target='RFC5661' /> which applies
+        the term in some cases even when other sorts of protocols
+        are being used. Depending on the layout, there might be one
+        or more data servers over which the data is striped.
+        While the metadata server is strictly accessed over
+        the NFSv4.1 protocol, depending on the layout type, the
+        data server could be accessed via any file access protocol
         that meets the pNFS requirements.
+        <vspace blankLines='1' />
+        See <xref target='sec:intro:diff' /> for a comparison of this
+        term and "data storage device".
       </t>
 
       <t hangText='fencing:'>
@@ -134,7 +150,7 @@
         time since last modification, access, etc.
       </t>
 
-      <t hangText='Metadata Server (MDS):'>
+      <t hangText='metadata server (MDS):'>
         is the pNFS server which provides metadata information
         for a file system object. It also is responsible for
         generating layouts for file system objects. Note that
