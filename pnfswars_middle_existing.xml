@@ -83,13 +83,12 @@
     </t>
 
     <t>
-      Finally, the data server can check the stateid presented
-      in the READ or WRITE operation to see if that stateid has been
-      rejected such to cause the I/O to be fenced. Whilst it might
+      Finally, the data server can check the stateid presented in the READ
+      or WRITE operation to see if that stateid has been rejected by the
+      metadata server such to cause the I/O to be fenced. Whilst it might
       just be the open owner or lock owner on that client being fenced,
-      the client should take the NFS4ERR_BAD_STATEID error code to
-      mean it has been fenced from the file and contact the metadata
-      server.
+      the client should take the NFS4ERR_BAD_STATEID error code to mean
+      it has been fenced from the file and contact the metadata server.
     </t>
   </section>
 
