@@ -14,11 +14,13 @@
 
   <section anchor="sec:fencing:files" title="File Layout Type">
     <t>
-      Not surprisingly, the file layout type comes closest to the
-      normal semantics of NFSv4.1. In particular, the stateid used
-      for I/O MUST have the same effect and be subject to
-      the same validation on a data server as it would if the I/O was being
-      performed on the metadata server itself in the absence of pNFS.
+      Because the storage protocol is a subset of NFSv4.1, the semantics
+      of the file layout type comes closest to the semantics of NFSv4.1
+      in the absence of pNFS.  In particular, the stateid and principa
+      used for I/O MUST have the same effect and be subject to the
+      same validation on a data server as it would if the I/O were
+      being performed on the metadata server itself.  The same set of
+      validations apply whether pNFS is in effect or not.
     </t>
 
     <t>
