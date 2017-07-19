@@ -245,30 +245,41 @@
 
   <section anchor="sec:control:edits" title="Editorial Requirements">
     <t>
-      In addition to these protocol requirements, there are two editorial
-      requirements for drafts that present a new layout type. At a
-      minimum, the specification needs to address:
-
-      <list style='format (%d)'>
-        <t>
-          The approach the new layout type takes towards fencing clients once the
-          metadata server determines that the layout is revoked.
-        </t>
-
-        <t>
-          The security considerations of the new layout type.
-        </t>
-      </list>
-
-      While these could be envisioned as one section in that the fencing issue might be
-      the only security issue, it is recommended to deal with them separably.
+      This section discusses how the protocol requirements discussed above
+      need to be addressed in documents specifying a new layout type.
+      Depending on the interoperability model for the layout type in
+      question, this may involve the imposition of layout-type-specific
+      requirements that ensure appropriate interoperability of pNFS
+      components which are developed separately.
     </t>
 
     <t>
-      The specification of the layout type should discuss how the client, metadata server,
-      and storage device act together to meet the protocol requirements. I.e., if the storage
-      device cannot enforce mandatory byte-range locks, then how can the metadata
-      server and the client interact with the layout to enforce those locks?
+      The specification of the Layout Type needs to make clear how the
+      client, metadata server, and storage device act together to meet
+      the protocol requirements discussed previously.  If the document
+      does not impose implementation requirements sufficient to ensure
+      that these semantic requirements are met, it is not appropriate
+      for the working group to allow the document to move forward.
+    </t>
+
+    <t>
+      Some examples include:
+
+      <list style='symbols'>
+        <t>
+          If the metadata server does not have a means to invalidate
+          a stateid issued to the storage device to keep a particular
+          client from accessing a specific file, then the layout type
+          spefication has to document how the metadata server is going to
+          fence the client from access to the file on that storage device.
+        </t>
+
+        <t>
+          If the metadata server implements mandatory byte-range locking
+          when accessed directly by the client, it must do so when data
+          is read or written using the designated storage protocol.
+        </t>
+      </list>
     </t>
   </section>
 </section>
