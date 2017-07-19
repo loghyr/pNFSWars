@@ -204,24 +204,46 @@
     </list>
   </t>
 
-  <section anchor='sec:intro:diff' title="Difference Between a Data Server and a Storage Device">
+  <section anchor='sec:intro:diff' title='Use of the Terms "Data Server" and "Storage Device"'>
     <t>
-      We defined a data server as a pNFS server, which implies that it
-      can utilize the NFSv4.1 protocol to communicate with the client.
-      As such, only the file layout type would currently meet this
-      requirement. The more generic concept is a storage device, which
-      can use any protocol to communicate with the client. The requirements
-      for a storage device to act together with the metadata server
-      to provide data to a client are that there is a layout type
-      specification for the given protocol and that the metadata server
-      has granted a layout to the client. Note that nothing precludes
-      there being multiple supported layout types (i.e., protocols)
-      between a metadata server, storage devices, and client.
+      In <xref target='RFC5661' />, these the two terms of "Data Server"
+      and "Storage Device" are used somewhat inconsistently:
     </t>
 
     <t>
-      As storage device is the more encompassing terminology, this document
-      utilizes it over data server.
+      <list style='symbols'>
+        <t>
+          In chapter 12, where pNFS in general is discussed, the term
+          "storage device" is used.
+        </t>
+
+        <t>
+          In chapter 13, where the file layout type is discussed, the term
+          "data server" is used.
+        </t>
+
+        <t>
+          In other chapters, the term "data server" is used, even in
+          contexts where the storage access type is not NFSv4.1 or any
+          other file access protocol.
+        </t>
+      </list>
+    </t>
+
+    <t>
+      As this document deals with pNFS in general, it uses the more
+      generic term "storage device" in preference to "data server".
+      The term "data server" is used only in contexts in which a file
+      server is used as a storage device.  Note that every data
+      server is a storage device but that storage devices which use
+      protocols which are not file access protocol are not data servers.
+    </t>
+
+    <t>
+      Since a given storage device may support multiple layout types,
+      a given device can potentially act as a data server for some set of
+      storage protocols while simultaneously acting as a non-data-server
+      storage device for others.
     </t>
   </section>
 
