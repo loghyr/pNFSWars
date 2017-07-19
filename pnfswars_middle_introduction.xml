@@ -149,6 +149,11 @@
         the file data on the underlying storage devices.
       </t>
 
+      <t hangText='loose coupling:'>
+        describes when the control protocol, between a metadata server 
+        and storage device, is a storage protocol.
+      </t>
+
       <t hangText='(file) metadata:'>
         is that part of the file system object that contains various
         descriptive data relevant to the file object, as opposed to
@@ -200,6 +205,12 @@
         storage device,  Each layout type may specify its own storage
         protocol.  It is possible for a layout type to specify
         multiple access protocols.
+      </t>
+
+      <t hangText='tight coupling:'>
+        describes when the control protocol, between a metadata server 
+        and storage device, is either a propritary approach or based
+        on a standards-track document.
       </t>
     </list>
   </t>

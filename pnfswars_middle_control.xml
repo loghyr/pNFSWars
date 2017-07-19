@@ -4,14 +4,73 @@
 <section anchor="sec:control" title="The Control Protocol">
   <t>
     In Section 12.2.6 of <xref target='RFC5661' />, the control
-    protocol is introduced. There have been no specifications
-    for control protocols, and indeed there need not be such
-    a protocol in use for any given implementation. The control
-    protocol is actually a set of requirements provided to
-    describe the interaction between the metadata server and
-    the storage device. When specifying a new layout type, the
-    defining document MUST show how it meets these requirements,
-    especially with respect to the security implications.
+    protocol was introduced.  There have been no published specifications
+    for control protocols as yet.  The control protocol denotes
+    any mechanism used to meet the requirements that apply to the
+    interaction between the metadata server and the storage device
+    such that they present a consistent interface to the client.
+    Particular implementations may satisfy this requirement in any
+    manner they choose and the mechanism chosen may not be described as
+    a protocol.  Specifications defining Layout Types need to clearly
+    show how implementations can meet the requirements discussed below,
+    especially with respect to those that have security implications.
+    In addition, such specifications may find it necessary to impose
+    requirements on implementations of the layout type to ensure
+    appropriate interoperability.
+  </t>
+
+  <t>
+    In some cases, there may be no control protocol other than the storage
+    protocol.  This is often described as using a "loose coupling" model.
+    In such cases, the assumption is that the metadata server,
+    storage devices, and client may be changed independently and that
+    the implementation requirements in the layout type specification
+    need to ensure this degree of interoperability.  This model is used
+    in the block and object layout type specification.
+  </t>
+
+  <t>
+    In some cases, there may be no control protocol other than the storage
+    In other cases, it is assumed that there may be purpose-built control
+    protocol which may be different for different implementations of the
+    metadata server and data server.  In such cases, the assumption is
+    that the metadata server and data servers are designed and implemented
+    as a unit and interoperability needs to be assured between clients
+    and metadata-data server pairs, developed independently. This is
+    the model used for the files layout.
+  </t>
+
+  <t>
+    In some cases, there may be no control protocol other than the storage
+    Another possibility, not so far realized, is for the definition of
+    a control protocol to be specified in a standards-track document.
+    There are two subcases to consider:
+
+    <list style='symbols'>
+      <t>
+        A new layout type includes a definition of a particular
+        control protocol whose use is obligatory for metadata serverss
+        and storage devices implementing the layout type.  In this case
+        the interoperability model is similar to the first case above
+        and the defining document should assure interoperability among
+        metadata servers, storage devices, and clients developed
+        independently.
+      </t>
+
+      <t>
+        A control protocol is defined in a standards-track document
+        which meets the control protocol requirements for one of the
+        existing layout types.  In this case, the new document's job
+        is to assure interoperability between metadata servers and
+        storage devices developed separately.  The existing  definition
+        document for the selected layout type retains the function of
+        assuring interoperability between clients and a given collection
+        of metadata servers and storage devices.  In this context,
+        implementations that implement the new protocol are treated in
+        the same way as those that use an internal control protocol or
+        a functional equivalent.
+      </t>
+    </list>
   </t>
 
   <section anchor="sec:control:req" title="Protocol Requirements">
