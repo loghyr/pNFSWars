@@ -1,7 +1,17 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section anchor="sec:fencing" title="Implementations in Existing Layout Types">
+<section anchor="sec:fencing" title="Specifications of Existing Layout Types">
+  <t>
+    This section is not normative with regards to each of the presented
+    types. This document does not update the specification of either
+    the block layout type (see <xref target='RFC5663' />) or the object
+    layout type (see <xref target='RFC5664' />).  Nor does it update
+    Section 13 of <xref target='RFC5661' />, but rather Section 12 of
+    that document. In other words, it is the pNFS requirements being
+    updated, not the specification of the file layout type.
+  </t>
+
   <section anchor="sec:fencing:files" title="File Layout Type">
     <t>
       Not surprisingly, the file layout type comes closest to the
