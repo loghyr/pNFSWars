@@ -73,35 +73,55 @@
     </list>
   </t>
 
-  <section anchor="sec:control:req" title="Protocol Requirements">
+  <section anchor="sec:control:req" title="Protocol REQUIREMENTS">
     <t>
-      The broad requirements of such interactions between the metadata
+      The REQUIREMENTS of such interactions between the metadata
       server and the storage devices are:
 
       <list style='format (%d)'>
         <t>
-          NFSv4.1 clients MUST be able to access a file directly through the
-          metadata server and not the storage device. I.e., the metadata
-          server must be able to retrieve the data from the constituent
-          storage devices and present it back to the client via normal NFSv4.1
-          operations. Whether the metadata server allows access over other
-          protocols (e.g., NFSv3, Server Message Block (SMB), etc) is
-          strictly an implementation choice.
+          The metadata server MUST be able to service the client's
+          I/O requests if the client decides to make such requests
+          to the metadata server instead of to the storage device.
+          The metadata server must be able to retrieve the data
+          from the constituent storage devices and present it back
+          to the client.  A corollary to this is that even though
+          the metadata server has successfully given the client
+          a layout, the client MAY still send I/O requests to the
+          metadata server.
+          <vspace blankLines="1" />
+          Whether the metadata server allows access over other protocols
+          (e.g., NFSv3, Server Message Block (SMB), etc) is strictly an
+          implementation choice, just as it is in the case of any other
+          (i.e., non-pNFS-supporting) NFSv4.1 server.
         </t>
 
         <t>
           The metadata server MUST be able to restrict access to a file
           on the storage devices when it revokes a layout. The metadata
           server typically would revoke a layout whenever a client fails
-          to respond to a recall or fails to renew its lease in time. It
-          might also revoke the layout as a means of enforcing a change
-          in state that the storage device cannot directly enforce with
-          the client.
+          to respond to a recall or a client's lease is expired due to
+          non-renewal. It might also revoke the layout as a means of
+          enforcing a change in locking state or access permissions that
+          the storage device cannot directly enforce.
+          <vspace blankLines="1" />
+          Effective revocation may require client co-operation in using a
+          particular stateid (files layout) or principal (e,g., flexible
+          files layout) when performing I/O.
         </t>
 
         <t>
-          Storage devices MUST NOT remove NFSv4.1's access controls: ACLs and
-          file open modes.
+          A pNFS impelementation MUST NOT remove NFSv4.1's access
+          controls: ACLs and file open modes. While Section 12.9 of
+          <xref target='RFC5661' /> specifically lays this burden on
+          the combination of clients, storage devices, and the
+          metadata server, depending on the implementation, there
+          might be a requirement that the metadata server update
+          the storage device such that it can enforce security.
+          <vspace blankLines="1" />
+          The file layout requires the storage device to enforce
+          access whereas the flex file layout requires both the
+          storage device and the client to enforce security.
         </t>
 
         <t>
