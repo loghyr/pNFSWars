@@ -11,7 +11,7 @@
     such that they present a consistent interface to the client.
     Particular implementations may satisfy this requirement in any
     manner they choose and the mechanism chosen may not be described as
-    a protocol.  Specifications defining Layout Types need to clearly
+    a protocol.  Specifications defining layout types need to clearly
     show how implementations can meet the requirements discussed below,
     especially with respect to those that have security implications.
     In addition, such specifications may find it necessary to impose
@@ -170,7 +170,7 @@
 
     <t>
       These requirements may be satisfied in different ways by different
-      Layout Types. As an example, while the file layout type does use
+      layout types. As an example, while the file layout type does use
       the stateid to fence off the client, there is no requirement that
       other layout types use this stateid approach.
     </t>
@@ -254,7 +254,7 @@
     </t>
 
     <t>
-      The specification of the Layout Type needs to make clear how the
+      The specification of the layout type needs to make clear how the
       client, metadata server, and storage device act together to meet
       the protocol requirements discussed previously.  If the document
       does not impose implementation requirements sufficient to ensure
