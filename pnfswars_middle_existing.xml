@@ -46,19 +46,19 @@
         <t hangText='"MUST":'>
           in Section 13.6 of <xref target='RFC5661' />
           <vspace blankLines='1' />
-          As described in Section 12.5.1, a client MUST NOT send an I/O
+          "As described in Section 12.5.1, a client MUST NOT send an I/O
           to a data server for which it does not hold a valid layout;
-          the data server MUST reject such an I/O.
+          the data server MUST reject such an I/O."
         </t>
 
         <t hangText='"SHOULD":'>
           in Section 13.8 of <xref target='RFC5661' />
           <vspace blankLines='1' />
 
-          The iomode need not be checked by the data servers when clients
+          "The iomode need not be checked by the data servers when clients
           perform I/O.  However, the data servers SHOULD still validate
           that the client holds a valid layout and return an error if
-          the client does not.
+          the client does not."
         </t>
       </list>
 
@@ -103,34 +103,39 @@
       Access to block storage is logically at a lower layer of the
       I/O stack than NFSv4, and hence NFSv4 security is not directly
       applicable to protocols that access such storage directly.
-      As such, <xref target='RFC5663' />
-      is very careful to define that in environments where pNFS
-      clients cannot be trusted to enforce such policies, pNFS block
-      layout types SHOULD NOT be used.
+      As such, Section 2.1 <xref target='RFC5663' />
+      specifies that:
+
+      <list style='hanging'>
+        <t hangText=''>
+          "in environments where pNFS clients cannot be trusted to enforce
+          such policies, pNFS block layout types SHOULD NOT be used."
+        </t>
+      </list>
     </t>
 
     <t>
-      The implication here is that the security burden has shifted
-      from the storage devices to the client.  It is the responsibility
-      of the administrator doing the deployment to trust the client
-      implementation. However, this is not a new requirement when it
-      comes to SAN protocols, the client is expected to provide
-      block-based protection.
+      As a result of these granularity issues, the security burden
+      has been shifted from the storage devices to the client.  Those
+      deploying implementations of this layout type need to be sure that
+      the client implementation can be trusted  This is not a new sort of
+      requirement in the context of SAN protocols.  In such environments,
+      the client is expected to provide block-based protection.
     </t>
 
     <t>
-      This implication also extends to ACLs, locks, and layouts. The
-      storage devices might not be able to enforce any of these and
-      the burden is pushed to the client to make the appropriate
+      This shift of the burden also extends to ACLs, locks, and
+      layouts. The storage devices might not be able to enforce any of
+      these and the burden is pushed to the client to make the appropriate
       checks before sending I/O to the storage devices. As an example,
-      if the metadata server uses a layout iomode for reading to
-      enforce a mandatory read-only lock, then the client has to honor
-      that intent by not sending WRITEs to the storage devices. The basic
-      issue here is that the storage device can be treated as a local dumb disk
-      such that once the client has access to the storage device,
-      it is able to perform either READ or WRITE I/O to the entire
-      storage device. The byte ranges in the layout, any locks, the
-      layout iomode, etc, can only be enforced by the client.
+      if the metadata server uses a layout iomode for reading to enforce
+      a mandatory read-only lock, then the client has to honor that
+      intent by not sending WRITEs to the storage devices. The basic
+      issue here is that the storage device can be treated as a local
+      dumb disk such that once the client has access to the storage
+      device, it is able to perform either READ or WRITE I/O to the
+      entire storage device. The byte ranges in the layout, any locks,
+      the layout iomode, etc, can only be enforced by the client.
     </t>
 
     <t>
