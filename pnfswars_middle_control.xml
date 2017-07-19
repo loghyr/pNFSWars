@@ -132,61 +132,102 @@
           The metadata server and the storage devices MUST agree on 
           attributes like modify time, the change attribute, and
           the end-of-file (EOF) position.
-          <vspace blankLines="1"/>
-          Note that "agree" here means that some state changes need not be propagated
-          immediately, although all changes SHOULD be propagated promptly.
+
+          <list style='format (%c)'>
+            <t>
+              "Agree" in the sense that some while state changes
+              need not be propagated immediately, they must be
+              propagated when accessed by the client. This access
+              is typically in response to a GETATTR of those
+              attributes.
+            </t>
+
+            <t>
+              A particular storage device might be striped such
+              it knows nothing about the EOF position.  It still
+              meets the requirement of agreeing on that fact with
+              the metadata server.
+            </t>
+
+            <t>
+              Both clock skew and network delay can lead to
+              the metadata server and the storage device having
+              different concepts of the time attributes. As long
+              as those differences can be accounted for what is
+              presented to the client in a GETATTR, then the
+              two "agree".
+            </t>
+
+            <t>
+              A LAYOUTCOMMIT requires that storage device generated
+              changes in attributes need be reflected in the metadata
+              server by the completion of the operation.
+            </t>
+          </list>
         </t>
       </list>
     </t>
 
     <t>
-      Note that there is no requirement on how these are implemented. While the file layout
-      type does use the stateid to fence off the client, there is no requirement that
-      other layout types use this stateid approach. But the other layout types
-      MUST document how the client, metadata server, and storage devices interact
-      to meet these requirements.
+      These requirements may be satisfied in different ways by different
+      Layout Types. As an example, while the file layout type does use
+      the stateid to fence off the client, there is no requirement that
+      other layout types use this stateid approach.
+    </t>
+
+    <t>
+      Each new standards-track document for a layout types MUST
+      address how the client, metadata server, and storage devices
+      interact to meet these requirements.
     </t>
   </section>
 
-  <section anchor="sec:control:nonreq" title="Non-protocol Requirements">
+  <section anchor="sec:control:nonreq" title="Protocol Non-REQUIREMENTS">
     <t>
-      In gathering the requirements from Section 12 of <xref target='RFC5661' />,
-      there are some which are notable in their absence:
+      In gathering the requirements from Section 12 of <xref
+      target='RFC5661' />, there are some which are notable in their
+      absence:
 
       <list style='format (%d)'>
         <t>
-          Storage device MUST honor the byte range restrictions present in the
-          layout. I.e., if the layout only provides access to the first
-          2 MB of the file, then any access after that MUST NOT be granted.
+          Storage devices MUST honor the byte range restrictions present
+          in the layout. I.e., if the layout only provides access to
+          the first 2 MB of the file, then any access after that MUST
+          NOT be granted.
         </t>
 
         <t>
-          The enforcement of
-          authentication and authorization so that restrictions that would be
-          enforced by the metadata server are also enforced by the storage device.
-          Examples include both export access checks and if the layout has an iomode
-          of LAYOUTIOMODE4_READ, then if the client attempts to write, the I/O may be rejected.
+          The enforcement of authentication and authorization so that
+          restrictions that would be enforced by the metadata server
+          are also enforced by the storage device.  Examples include
+          both export access checks and if the layout has an iomode
+          of LAYOUTIOMODE4_READ, then if the client attempts to write,
+          the I/O may be rejected.
           <vspace blankLines="1"/>
-          While storage devices should make such checks on the layout iomode, <xref target='RFC5661' />
-          does not mandate that all layout types have to make such checks.
+
+          While storage devices should make such checks on the layout
+          iomode, <xref target='RFC5661' /> does not mandate that all
+          layout types have to make such checks.
         </t>
 
         <t>
-          The allocation and deallocation of storage. I.e., creating and deleting files.
+          The allocation and deallocation of storage. I.e., creating
+          and deleting files.
         </t>
       </list>
     </t>
 
     <t>
-      Of these, the first two are of concern to this draft and layout types SHOULD honor
-      them if at all possible,
+      Of these, the first two are of concern to this draft and layout
+      types SHOULD honor them if at all possible,
     </t>
   </section>
 
   <section anchor="sec:control:edits" title="Editorial Requirements">
     <t>
-      In addition to these protocol requirements, there are two editorial requirements for drafts
-      that present a new layout type. At a minimum, the specification needs to address:
+      In addition to these protocol requirements, there are two editorial
+      requirements for drafts that present a new layout type. At a
+      minimum, the specification needs to address:
 
       <list style='format (%d)'>
         <t>
