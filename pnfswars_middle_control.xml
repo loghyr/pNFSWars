@@ -182,7 +182,7 @@
     </t>
   </section>
 
-  <section anchor="sec:control:nonreq" title="Protocol Non-REQUIREMENTS">
+  <section anchor="sec:control:nonreq" title="Undocumented Protocol REQUIREMENTS">
     <t>
       In gathering the requirements from Section 12 of <xref
       target='RFC5661' />, there are some which are notable in their
@@ -190,36 +190,56 @@
 
       <list style='format (%d)'>
         <t>
-          Storage devices MUST honor the byte range restrictions present
-          in the layout. I.e., if the layout only provides access to
-          the first 2 MB of the file, then any access after that MUST
-          NOT be granted.
+          Clients MUST NOT perform I/O to the storage device if they
+          do not have layouts for the files in question.
         </t>
 
         <t>
-          The enforcement of authentication and authorization so that
-          restrictions that would be enforced by the metadata server
-          are also enforced by the storage device.  Examples include
-          both export access checks and if the layout has an iomode
-          of LAYOUTIOMODE4_READ, then if the client attempts to write,
-          the I/O may be rejected.
-          <vspace blankLines="1"/>
-
-          While storage devices should make such checks on the layout
-          iomode, <xref target='RFC5661' /> does not mandate that all
-          layout types have to make such checks.
+          Clients MUST be allowed to perform I/O to the metadata server
+          even if they already have a LAYOUT.  A layout type
+          might discourage such I/O, but it can not forbid it.
         </t>
 
         <t>
-          The allocation and deallocation of storage. I.e., creating
-          and deleting files.
+          Clients MUST NOT perform I/O operations outside of the
+          specified ranges in the layout segment.
+        </t>
+
+        <t>
+          Clients MUST NOT perform I/O operations which would be
+          inconsistent with the iomode specified in the layout segments
+          it holds.
+        </t>
+
+        <t>
+          The metadata server MUST be able to do allocation and
+          deallocation of storage. I.e., creating and deleting files.
         </t>
       </list>
     </t>
 
     <t>
-      Of these, the first two are of concern to this draft and layout
-      types SHOULD honor them if at all possible,
+      Under the file layout type, the storage devices are able to meet
+      all of these requirements. However, this is not the case with the
+      other known layout types,  Instead, the burden is shifted to both:
+
+      <list style='format (%d)'>
+        <t>
+          The client itself.
+        </t>
+
+        <t>
+          The interaction of the metadata server and the client.
+        </t>
+      </list>
+    </t>
+
+    <t>
+      The metadata server is responsible for giving the client enough
+      information to make informed decisions and for trusting the
+      client implementation to do so. This communication would be
+      through the callback operatios available to the metadata server,
+      e.g., recalling a layout, a delegation, etc.
     </t>
   </section>
 
