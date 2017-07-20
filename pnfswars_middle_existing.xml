@@ -124,29 +124,31 @@
     </t>
 
     <t>
-      This shift of the burden also extends to ACLs, locks, and
-      layouts. The storage devices might not be able to enforce any of
-      these and the burden is pushed to the client to make the appropriate
-      checks before sending I/O to the storage devices. As an example,
-      if the metadata server uses a layout iomode for reading to enforce
-      a mandatory read-only lock, then the client has to honor that
-      intent by not sending WRITEs to the storage devices. The basic
-      issue here is that the storage device can be treated as a local
-      dumb disk such that once the client has access to the storage
-      device, it is able to perform either READ or WRITE I/O to the
-      entire storage device. The byte ranges in the layout, any locks,
-      the layout iomode, etc, can only be enforced by the client.
+      This shift of the burden also extends to locks and
+      layouts. The storage devices are not able to enforce any of these
+      and the burden is pushed to the client to make the appropriate
+      checks before sending I/O to the storage devices.  For example,
+      the server may use a layout iomode only allowing reading to enforce
+      a mandatory read-only lock,  In such cases, the client has to
+      support that use by not sending WRITEs to the storage devices.
+      The fundamental issue here is that the storage device is treated by
+      this layout type as a local dumb disk.  Once the client has access
+      to the storage device, it is able to perform both READ and WRITE I/O
+      to the entire storage device.  The byte ranges in the layout, any
+      locks, the layout iomode, etc, can only be enforced by the client.
+      Therefore, the client is required to provide that enforcement.
     </t>
 
     <t>
-      While the block layout type does support client fencing upon
-      revoking a layout, the above restrictions come into play again:
-      the granularity of the fencing can only be at the host/logical-unit
-      level. Thus, if one of a client's layouts is unilaterally revoked
-      by the server, it will effectively render useless *all* of the
-      client's layouts for files located on the storage units comprising
-      the logical volume.  This may render useless the client's layouts
-      for files in other file systems.
+      In the context of fencing off of the client upon revocation
+      of a layout, these limitations come into play again, i.e., the
+      granularity of the fencing can only be at the host/logical-unit
+      level.  Thus, if one of a client's layouts is revoked by the
+      server, it will effectively revoke all of the client's layouts for
+      files located on the storage units comprising the logical volume.
+      This may extend to the client's layouts for files in other file
+      systems.  Clients need to be prepared for such revocations and
+      reacquire layouts as needed.
     </t>
   </section>
 
