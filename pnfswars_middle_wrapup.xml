@@ -6,15 +6,16 @@
     In the three published layout types, the burden of enforcing
     the security of NFSv4.1 can fall to either the storage devices
     (files), the client (blocks), or the metadata server (objects).
-    Such decisions seem to be forced by the native capabilities of
-    the storage devices - if a real control protocol can be implemented,
+    Such choices are conditioned by the native capabilities of
+    the storage devices - if a control protocol can be implemented,
     then the burden can be shifted primarily to the storage devices.
   </t>
 
   <t>
-    But as we have seen, the control protocol is actually a set of
-    requirements. And as new layout types are published, the enclosing
-    documents minimally MUST address:
+
+    In the context of this document, we treat the control protocol as
+    a set of requirements.  And as new layout types are published,
+    the defining documents MUST address:
 
     <list style='format (%d)'>
       <t>
@@ -27,5 +28,11 @@
         NFSv4.1 security model.
       </t>
     </list>
+  </t>
+
+  <t>
+    In addition, these defining  documents need to make clear how other
+    semantic requirements of NFSv4.1 (e.g., locking) are met in the
+    context of the proposed layout type.
   </t>
 </section>
