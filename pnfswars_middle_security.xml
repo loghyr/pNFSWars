@@ -2,9 +2,33 @@
 <!-- Copyright (C) The Internet Society (2014) -->
 
 <section anchor="sec:security" title="Security Considerations">
+
   <t>
-    The metadata server MUST be able to fence off a client's access to a file
-    stored on a storage device. When it revokes the layout, the client's access
-    MUST be terminated at the storage devices.
+    This section does not deal directly with security considerations
+    for existing or new layout types.  Instead, it provides a general
+    framework for understating security-related issues within the pNFS
+    framework.  Specific security considerations will be addressed in the
+    Security Considerations sections of documents specifying layout types.
+  </t>
+
+  <t>
+    The layout type specification must ensure that only data accesses
+    consistent with the NFSV4.1 security model are allowed.  It may do
+    this directly, by providing that appropriate checks be performed
+    at the time the access is performed. It may do it indirectly by
+    allowing the client or the storage device to be responsible for
+    making the appropriate checks.  In the latter case, I/O access writes
+    are reflected in layouts and the layout type must provide a way to
+    prevent inappropriate access due to permissions changes between the
+    time a layout is granted and the time the access is performed.
+  </t>
+
+  <t>
+    The metadata server MUST be able to fence off a client's access
+    to the data file on a storage device. When it revokes the layout,
+    the client's access MUST be terminated at the storage devices.
+    The client the has the opportunity to re-acquire the layout and
+    perform the security check in the context of the newly current
+    access permissions.
   </t>
 </section>
