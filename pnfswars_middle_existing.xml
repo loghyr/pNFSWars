@@ -154,23 +154,25 @@
 
   <section anchor="sec:fencing:objects" title="Object Layout Type">
     <t>
-      The object layout type focuses security checks to occur during
-      the allocation of the layout. The client will typically ask
-      for a layout for each byte-range of either READ or READ/WRITE.
-      At that time, the metadata server should verify permissions
-      against the layout iomode, the outstanding locks, the file
-      mode bits or ACLs, etc. As the client may be acting for
-      multiple local users, it MUST authenticate and authorize the
-      user by issuing respective OPEN and ACCESS calls to the
-      metadata server, similar to having NFSv4 data delegations.
+      With the object layout type, security checks occur during the
+      allocation of the layout.  The client will typically ask for
+      layouts covering all of the file and may do so for either READ
+      or READ/WRITE.  This enables it to do subsequent I/O operations
+      without the need to obtain layouts for specific byte ranges.
+      At that time, the metadata server should verify permissions against
+      the layout iomode, the file mode bits or ACLs, etc. As the client
+      may be acting for multiple local users, it MUST authenticate and
+      authorize the user by issuing respective OPEN and ACCESS calls to
+      the metadata server, similar to having NFSv4 data delegations.
     </t>
 
     <t>
-      Upon successful authorization, inside the layout, the client
-      receives a set of object capabilities allowing it I/O
-      access to the specified objects corresponding to the requested
-      iomode. These capabilities are used to enforce access control
-      at the storage devices.  Whenever the metadata server detects one of:
+      Upon successful authorization, the client receives within the layout
+      a set of object capabilities allowing it I/O access to the specified
+      objects corresponding to the requested iomode. These capabilities
+      are used to enforce access control and locking semantics at the
+      storage devices.  Whenever one of the following occur on the
+      metadata server:
 
       <list style='symbols'>
         <t>
@@ -184,14 +186,15 @@
         </t>
       </list>
 
-      then it MUST change the capability version attribute on all objects
-      comprising the file to implicitly invalidate any outstanding
-      capabilities before committing to one of these changes.
+      then the metadate server MUST change the capability version
+      attribute on all objects comprising the file to in order to
+      invalidate any outstanding capabilities before committing to one
+      of these changes.
     </t>
 
     <t>
-      When the metadata server wishes to fence off a client to a particular
-      object, then it can use the above approach to invalidate
+      When the metadata server wishes to fence off a client to a
+      particular object, then it can use the above approach to invalidate
       the capability attribute on the given object. The client can
       be informed via the storage device that the capability has been
       rejected and is allowed to fetch a refreshed set of capabilities,
