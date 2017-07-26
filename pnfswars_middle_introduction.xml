@@ -9,7 +9,7 @@
     Clients and servers implementing different layout types behave
     differently in many ways while conforming to the overall pNFS
     framework defined in <xref target='RFC5661' /> and this document.
-    Layout types may differ in:
+    Layout types may differ as to:
 
     <list style='symbols'>
       <t>
@@ -38,7 +38,7 @@
     specification.  Except for the files layout type, which was
     defined in Section 13 of <xref target='RFC5661' />, existing
     layout types are defined in their own standards-track documents
-    and it is anticipated that new layout type will be defined in
+    and it is anticipated that new layout types will be defined in
     similar documents.
   </t>
 
@@ -46,8 +46,9 @@
     The file layout type
     was defined in the Network File System (NFS) version 4.1
     protocol specification <xref target='RFC5661' />. The block
-    layout type was defined in <xref target='RFC5663' /> and the object
-    layout type was in turn defined in <xref target='RFC5664' />.
+    layout type was defined in <xref target='RFC5663' /> while the object
+    layout type was defined in <xref target='RFC5664' />. Subsequently,
+    the SCSI layout type was defined in <xref target='RFC8154' />.
   </t>
 
   <t>
@@ -55,7 +56,7 @@
     ("Parallel NFS (pNFS)") and 13 ("NFSv4.1 as a Storage Protocol
     in pNFS: the File Layout Type") of <xref target='RFC5661' />
     as both being applying only to the file layout type. Because Section
-    13 was not covered in a separate standards-track document like
+    13 was not covered in a separate standards-track document such as
     those for both the block and object layout types, there had
     been some confusion as to the responsibilities of both the
     metadata server and the data servers (DS) which were laid out
@@ -65,9 +66,9 @@
   <t>
     As a consequence, new internet drafts (see <xref target='FlexFiles' />
     and <xref target='Lustre' />) may struggle to meet the requirements
-    to be a pNFS layout type. This document specifies the
-    layout type independent requirements placed on all layout types,
-    whether one of the original three or any new variant.
+    to be a pNFS layout type. This document specifies the requirements
+    placed on all layout types independent of the particular type chosen,
+    whether one of the original three or any new additional one.
   </t>
 </section>
 
@@ -86,14 +87,14 @@
         layout type would use to meet the control communication
         requirement for that layout type.  This need not be a
         protocol as normally understood.  In some cases the same
-        protocol my be used as a control protocol and data access
+        protocol may be used as a control protocol and data access
         protocol.
       </t>
 
       <t hangText='(file) data:'>
         is that part of the file system object which contains
         the data to read or writen. It is the contents of the object
-        and not the attributes of the object.
+        rather than the attributes of the object.
       </t>
 
       <t hangText='data server (DS):'>
@@ -105,7 +106,7 @@
         are being used. Depending on the layout, there might be one
         or more data servers over which the data is striped.
         While the metadata server is strictly accessed over
-        the NFSv4.1 protocol, depending on the layout type, the
+        the NFSv4.1 protocol, the
         data server could be accessed via any file access protocol
         that meets the pNFS requirements.
         <vspace blankLines='1' />
@@ -127,11 +128,12 @@
         <vspace blankLines='1' />
         The bulk of the contents of the layout are defined in <xref
         target='RFC5661' />  as nominally opaque, but individual layout
-        types may specify their own interpretation of layout data.
+        types are responsible for specifying the format of the layout data.
       </t>
 
       <t hangText='layout iomode:'>
-        see <xref target='sec:intro' />.
+        describes whether the layout granted to the client is
+        for read or read/write I/O.
       </t>
 
       <t hangText='layout stateid:'>
@@ -144,14 +146,13 @@
       </t>
 
       <t hangText='layout type:'>
-        describes both the storage protocol used to
+        specifies both the storage protocol used to
         access the data and the aggregation scheme used to lay out
         the file data on the underlying storage devices.
       </t>
 
       <t hangText='loose coupling:'>
-        describes when the control protocol, between a metadata server 
-        and storage device, is a storage protocol.
+        describes when the control protocol is a storage protocol.
       </t>
 
       <t hangText='(file) metadata:'>
@@ -171,16 +172,14 @@
       </t>
 
       <t hangText='recalling a layout:'>
-
         occurs when the metadata server issues a callbck to inform
         the client that the layout is to be returned in a graceful
-        manner. Note that the client could be able to flush any writes,
-        etc., before replying to the metadata server.
-
+        manner. Note that the client would have the opportunity to flush
+        any writes, etc., before replying to the metadata server.
       </t>
 
       <t hangText='revoking a layout:'>
-        occurs when the metadata server invalidates a specific layout
+        occurs when the metadata server invalidates a specific layout.
         Once revocation occurs, the metadata server will not accept as
         valid any reference to the revoked layout and a storage
         device will not accept any client access based on the layout.
@@ -202,22 +201,22 @@
 
       <t hangText='storage protocol:'>
         is the protocol used by clients to do I/O operations to the
-        storage device,  Each layout type may specify its own storage
-        protocol.  It is possible for a layout type to specify
-        multiple access protocols.
+        storage device.  Each layout type specifies the set of storage
+        protocols.
       </t>
 
       <t hangText='tight coupling:'>
-        describes when the control protocol, between a metadata server 
-        and storage device, is either a propritary approach or based
-        on a standards-track document.
+        describes a situation in which the control protocol is one
+        designed specifically for that purpose.  It may be either a
+        proprietary protocol, adapted specifically to a a particular
+        metadata server, or one based on a standards-track document.
       </t>
     </list>
   </t>
 
   <section anchor='sec:intro:diff' title='Use of the Terms "Data Server" and "Storage Device"'>
     <t>
-      In <xref target='RFC5661' />, these the two terms of "Data Server"
+      In <xref target='RFC5661' />, these two terms of "Data Server"
       and "Storage Device" are used somewhat inconsistently:
     </t>
 
@@ -266,5 +265,31 @@
       &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
       interpreted as described in <xref target="RFC2119" />.
     </t>
+
+    <t>
+
+      This document differs from most standards-track documents in that it
+      specifies requirements for those defining future layout types rather
+      than defining the requirements for implementations directly. This
+      document makes clear whether:
+
+      <list style='format (%d)'>
+        <t>
+          any particular requirement applies to implementations.
+        </t>
+
+        <t>
+          any particular requirement applies to those defining layout
+          types.
+        </t>
+
+        <t>
+          the requirement is a general requirement which implementations
+          need to conform to, with the specific  means left to layout
+          type definitions type to specify.
+        </t>
+      </list>
+    </t>
+
   </section>
 </section>
