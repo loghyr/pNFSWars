@@ -93,7 +93,7 @@
 
       <t hangText='(file) data:'>
         is that part of the file system object which contains
-        the data to read or writen. It is the contents of the object
+        the data to read or written. It is the contents of the object
         rather than the attributes of the object.
       </t>
 
@@ -159,7 +159,7 @@
         is that part of the file system object that contains various
         descriptive data relevant to the file object, as opposed to
         the file data itself.  This could include the time of last
-        modification, access time, eof position, etc.
+        modification, access time, end-of-file (EOF) position, etc.
       </t>
 
       <t hangText='metadata server (MDS):'>
@@ -172,7 +172,7 @@
       </t>
 
       <t hangText='recalling a layout:'>
-        occurs when the metadata server issues a callbck to inform
+        occurs when the metadata server issues a callback to inform
         the client that the layout is to be returned in a graceful
         manner. Note that the client would have the opportunity to flush
         any writes, etc., before replying to the metadata server.

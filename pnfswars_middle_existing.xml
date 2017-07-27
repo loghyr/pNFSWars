@@ -189,7 +189,7 @@
         </t>
       </list>
 
-      then the metadate server MUST change the capability version
+      then the metadata server MUST change the capability version
       attribute on all objects comprising the file to in order to
       invalidate any outstanding capabilities before committing to one
       of these changes.

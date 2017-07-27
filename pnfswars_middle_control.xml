@@ -49,7 +49,7 @@
     <list style='symbols'>
       <t>
         A new layout type includes a definition of a particular
-        control protocol whose use is obligatory for metadata serverss
+        control protocol whose use is obligatory for metadata servers
         and storage devices implementing the layout type.  In this case
         the interoperability model is similar to the first case above
         and the defining document should assure interoperability among
@@ -111,7 +111,7 @@
         </t>
 
         <t>
-          A pNFS impelementation MUST NOT allow the violation of NFSv4.1's
+          A pNFS implementation MUST NOT allow the violation of NFSv4.1's
           access controls: ACLs and file open modes.  Section 12.9 of
           <xref target='RFC5661' /> specifically lays this burden on
           the combination of clients, storage devices, and the metadata
@@ -136,7 +136,7 @@
         <t>
           Any disagreement between the metadata server and the storage
           devices as to the value of attributes such as modify time,
-          the change attribute, and the end-of-file (EOF) position MUST
+          the change attribute, and the EOF position MUST
           be of limited duration with clear means of resolution of any
           discrepancies being provided.  Note that
 
@@ -277,7 +277,7 @@
           If the metadata server does not have a means to invalidate
           a stateid issued to the storage device to keep a particular
           client from accessing a specific file, then the layout type
-          spefication has to document how the metadata server is going to
+          specification has to document how the metadata server is going to
           fence the client from access to the file on that storage device.
         </t>
 
