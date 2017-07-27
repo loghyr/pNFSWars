@@ -1,7 +1,7 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section anchor="sec:fencing" title="Specifications of Existing Layout Types">
+<section anchor="sec:fencing" title="Specifications of Original Layout Types">
   <t>
     This section is not normative with regards to each of the presented
     types. This document does not update the specification of either
@@ -9,7 +9,7 @@
     layout type (see <xref target='RFC5664' />).  Nor does it update
     Section 13 of <xref target='RFC5661' />, but rather Section 12 of
     that document. In other words, it is the pNFS requirements being
-    updated, not the specification of the file layout type.
+    updated rather than the specification of the file layout type.
   </t>
 
   <section anchor="sec:fencing:files" title="File Layout Type">
@@ -18,9 +18,9 @@
       of the file layout type comes closest to the semantics of NFSv4.1
       in the absence of pNFS.  In particular, the stateid and principal
       used for I/O MUST have the same effect and be subject to the
-      same validation on a data server as it would if the I/O were
+      same validation on a data server as it would have if the I/O were
       being performed on the metadata server itself.  The same set of
-      validations apply whether pNFS is in effect or not.
+      validations are applied whether pNFS is in effect or not.
     </t>
 
     <t>
@@ -40,11 +40,11 @@
       </list>
 
       these are each presented as a "SHOULD" and not a "MUST". Actually,
-      the first point is presented as both:
+      the first point is presented in <xref target='RFC5661' /> as both:
 
       <list style='hanging'>
         <t hangText='"MUST":'>
-          in Section 13.6 of <xref target='RFC5661' />
+          in Section 13.6
           <vspace blankLines='1' />
           "As described in Section 12.5.1, a client MUST NOT send an I/O
           to a data server for which it does not hold a valid layout;
@@ -52,7 +52,7 @@
         </t>
 
         <t hangText='"SHOULD":'>
-          in Section 13.8 of <xref target='RFC5661' />
+          in Section 13.8
           <vspace blankLines='1' />
 
           "The iomode need not be checked by the data servers when clients
@@ -62,30 +62,32 @@
         </t>
       </list>
 
-      However, it is just these layout specific checks that are optional,
-      not the normal file access semantics. The storage devices MUST
-      make all of the required access checks on each READ or WRITE I/O
-      as determined by the NFSv4.1 protocol.  If the metadata server
-      would deny a READ or WRITE operation on a file due to its ACL, mode
-      attribute, open access mode, open deny mode, mandatory byte-range
-      lock state, or any other attributes and state, the storage device
-      MUST also deny the READ or WRITE operation. And note that while
-      the NFSv4.1 protocol does not mandate export access checks based
-      on the client's IP address, if the metadata server implements such
-      a policy, then that counts as such state as outlined above.
+      It should be noted that it is just these layout specific checks
+      that are optional, not the normal file access semantics. The
+      storage devices MUST make all of the required access checks on
+      each READ or WRITE I/O as determined by the NFSv4.1 protocol.
+      If the metadata server would deny a READ or WRITE operation on a
+      file due to its ACL, mode attribute, open access mode, open deny
+      mode, mandatory byte-range lock state, or any other attributes
+      and state, the storage device MUST also deny the READ or WRITE
+      operation. Also while the NFSv4.1 protocol does not
+      mandate export access checks based on the client's IP address,
+      if the metadata server implements such a policy, then that counts
+      as such state as outlined above.
     </t>
 
     <t>
-      The data filehandle provided by the PUTFH operation to the
-      data server is sufficient to ensure that for the subsequent
-      READ or WRITE operation in the compound, that the client has a
-      valid layout for the I/O being performed.
+      The data filehandle provided by the PUTFH operation to the data
+      server provides sufficient context to enable the data server to
+      ensure that for the subsequent READ or WRITE operation in the
+      compound, that the client has a valid layout for the I/O being
+      performed.
     </t>
 
     <t>
       Finally, the data server can check the stateid presented in the READ
       or WRITE operation to see if that stateid has been rejected by the
-      metadata server such to cause the I/O to be fenced. Whilst it might
+      metadata server in order to cause the I/O to be fenced. Whilst it might
       just be the open owner or lock owner on that client being fenced,
       the client should take the NFS4ERR_BAD_STATEID error code to mean
       it has been fenced from the file and contact the metadata server.
@@ -94,17 +96,17 @@
 
   <section anchor="sec:fencing:blocks" title="Block Layout Type">
     <t>
-      With the block layout type, the storage devices are not guaranteed
-      to be able to enforce file-based security.
-      Typically, storage area network (SAN) disk arrays and SAN
-      protocols provide access control mechanisms (e.g., Logical Unit
-      Number (LUN) mapping and/or masking), which operate at the
-      granularity of individual hosts, not individual blocks.
-      Access to block storage is logically at a lower layer of the
-      I/O stack than NFSv4, and hence NFSv4 security is not directly
-      applicable to protocols that access such storage directly.
-      As such, Section 2.1 <xref target='RFC5663' />
-      specifies that:
+      With the block layout type, the storage devices are generally
+      not able to enforce file-based security.  Typically, storage area
+      network (SAN) disk arrays and SAN protocols provide coarse-grained
+      access control mechanisms (e.g., Logical Unit Number (LUN) mapping
+      and/or masking), with a target granularity of disks rather than
+      individual blocks and a source granularity of individual hosts
+      rather than of users or owners.  Access to block storage is
+      logically at a lower layer of the I/O stack than NFSv4. As a result
+      NFSv4 security is not directly applicable to protocols that access
+      such storage directly.  As such, Section 2.1
+      <xref target='RFC5663' /> specifies that:
 
       <list style='hanging'>
         <t hangText=''>
@@ -131,12 +133,13 @@
       the server may use a layout iomode only allowing reading to enforce
       a mandatory read-only lock,  In such cases, the client has to
       support that use by not sending WRITEs to the storage devices.
-      The fundamental issue here is that the storage device is treated by
-      this layout type as a local dumb disk.  Once the client has access
-      to the storage device, it is able to perform both READ and WRITE I/O
-      to the entire storage device.  The byte ranges in the layout, any
-      locks, the layout iomode, etc, can only be enforced by the client.
-      Therefore, the client is required to provide that enforcement.
+      The fundamental issue here is that the storage device is treated
+      by this layout type in the same fashion as a local disk device.
+      Once the client has access to the storage device, it is able to
+      perform both READ and WRITE I/O to the entire storage device.
+      The byte ranges in the layout, any locks, the layout iomode, etc,
+      can only be enforced by the client.  Therefore, the client is
+      required to provide that enforcement.
     </t>
 
     <t>
