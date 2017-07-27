@@ -3,11 +3,12 @@
 
 <section anchor="sec:control" title="The Control Protocol">
   <t>
-    In Section 12.2.6 of <xref target='RFC5661' />, the control
-    protocol was introduced.  There have been no published specifications
-    for control protocols as yet.  The control protocol denotes
-    any mechanism used to meet the requirements that apply to the
-    interaction between the metadata server and the storage device
+
+    In Section 12.2.6 of <xref target='RFC5661' />, the concept of
+    a control protocol was introduced.  There have been no
+    specifications for control protocols published so far.  The control protocol
+    denotes any mechanism used to meet the requirements that apply to
+    the interaction between the metadata server and the storage device
     such that they present a consistent interface to the client.
     Particular implementations may satisfy this requirement in any
     manner they choose and the mechanism chosen may not be described as
@@ -17,6 +18,7 @@
     In addition, such specifications may find it necessary to impose
     requirements on implementations of the layout type to ensure
     appropriate interoperability.
+
   </t>
 
   <t>
@@ -30,8 +32,7 @@
   </t>
 
   <t>
-    In some cases, there may be no control protocol other than the storage
-    In other cases, it is assumed that there may be purpose-built control
+    In other cases, it is assumed that there will be a  purpose-built control
     protocol which may be different for different implementations of the
     metadata server and data server.  In such cases, the assumption is
     that the metadata server and data servers are designed and implemented
@@ -41,7 +42,6 @@
   </t>
 
   <t>
-    In some cases, there may be no control protocol other than the storage
     Another possibility, not so far realized, is for the definition of
     a control protocol to be specified in a standards-track document.
     There are two subcases to consider:
@@ -73,9 +73,9 @@
     </list>
   </t>
 
-  <section anchor="sec:control:req" title="Protocol REQUIREMENTS">
+  <section anchor="sec:control:req" title="Control Protocol REQUIREMENTS">
     <t>
-      The REQUIREMENTS of such interactions between the metadata
+      The REQUIREMENTS of interactions between the metadata
       server and the storage devices are:
 
       <list style='format (%d)'>
@@ -111,57 +111,59 @@
         </t>
 
         <t>
-          A pNFS impelementation MUST NOT remove NFSv4.1's access
-          controls: ACLs and file open modes. While Section 12.9 of
+          A pNFS impelementation MUST NOT allow the violation of NFSv4.1's
+          access controls: ACLs and file open modes.  Section 12.9 of
           <xref target='RFC5661' /> specifically lays this burden on
-          the combination of clients, storage devices, and the
-          metadata server, depending on the implementation, there
-          might be a requirement that the metadata server update
-          the storage device such that it can enforce security.
+          the combination of clients, storage devices, and the metadata
+          server.  However the specification of the individual layout type
+          might create requirements as to how this is to be done. This
+          may include a possible requirement for the metadata server to
+          update the storage device so that it can enforce security.
           <vspace blankLines="1" />
           The file layout requires the storage device to enforce
           access whereas the flex file layout requires both the
           storage device and the client to enforce security.
+
         </t>
 
         <t>
-          Locking MUST be respected.
+          Interactions between locking and I/O operations MUST obey
+          existing semantic restrictions.  In particular, if an I/O
+          operation would be invalid when directed at the metadata server,
+          it is not to be allowed when performed on the storage device.
         </t>
 
         <t>
-          The metadata server and the storage devices MUST agree on 
-          attributes like modify time, the change attribute, and
-          the end-of-file (EOF) position.
+          Any disagreement between the metadata server and the storage
+          devices as to the value of attributes such as modify time,
+          the change attribute, and the end-of-file (EOF) position MUST
+          be of limited duration with clear means of resolution of any
+          discrepancies being provided.  Note that
 
           <list style='format (%c)'>
             <t>
-              "Agree" in the sense that some while state changes
-              need not be propagated immediately, they must be
-              propagated when accessed by the client. This access
-              is typically in response to a GETATTR of those
-              attributes.
+              Discrepancies need not be resolved unless any client has
+              accessed the file in question via the metadata server,
+              typically by performing a GETATTR.
             </t>
 
             <t>
-              A particular storage device might be striped such
-              it knows nothing about the EOF position.  It still
-              meets the requirement of agreeing on that fact with
-              the metadata server.
+              A particular storage device might be striped such it has
+              no information regarding the EOF position.
             </t>
 
             <t>
-              Both clock skew and network delay can lead to
-              the metadata server and the storage device having
-              different concepts of the time attributes. As long
-              as those differences can be accounted for what is
-              presented to the client in a GETATTR, then the
-              two "agree".
+              Both clock skew and network delay can lead to the metadata
+              server and the storage device having different values of
+              the time attributes.  As long as those differences can be
+              accounted for in what is presented to the client in a GETATTR,
+              then no violation results.
             </t>
 
             <t>
-              A LAYOUTCOMMIT requires that storage device generated
-              changes in attributes need be reflected in the metadata
-              server by the completion of the operation.
+              A LAYOUTCOMMIT requires that changes in attributes resulting
+              from operations on the storage device need to be reflected
+              in the metadata server by the completion of the operation.
             </t>
           </list>
         </t>
@@ -170,7 +172,7 @@
 
     <t>
       These requirements may be satisfied in different ways by different
-      layout types. As an example, while the file layout type does use
+      layout types. As an example, while the file layout type uses
       the stateid to fence off the client, there is no requirement that
       other layout types use this stateid approach.
     </t>
@@ -178,11 +180,11 @@
     <t>
       Each new standards-track document for a layout types MUST
       address how the client, metadata server, and storage devices
-      interact to meet these requirements.
+      are to interact to meet these requirements.
     </t>
   </section>
 
-  <section anchor="sec:control:nonreq" title="Undocumented Protocol REQUIREMENTS">
+  <section anchor="sec:control:nonreq" title="Previously Undocumented Protocol REQUIREMENTS">
     <t>
       In gathering the requirements from Section 12 of <xref
       target='RFC5661' />, there are some which are notable in their

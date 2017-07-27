@@ -3,7 +3,7 @@
 
 <section anchor="sec:wrapup" title="Summary">
   <t>
-    In the three published layout types, the burden of enforcing
+    In the three original layout types, the burden of enforcing
     the security of NFSv4.1 can fall to either the storage devices
     (files), the client (blocks), or the metadata server (objects).
     Such choices are conditioned by the native capabilities of
