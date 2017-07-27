@@ -186,20 +186,20 @@
 
   <section anchor="sec:control:nonreq" title="Previously Undocumented Protocol REQUIREMENTS">
     <t>
-      In gathering the requirements from Section 12 of <xref
-      target='RFC5661' />, there are some which are notable in their
-      absence:
+      While not explicitly stated as requirements in 
+      Section 12 of <xref target='RFC5661' />, the existing
+      layout types do have more requirements that they need
+      to enforce.
+    </t>
+
+    <t>
+      The client has these obligations when making I/O requests to
+      the storage devices:
 
       <list style='format (%d)'>
         <t>
           Clients MUST NOT perform I/O to the storage device if they
           do not have layouts for the files in question.
-        </t>
-
-        <t>
-          Clients MUST be allowed to perform I/O to the metadata server
-          even if they already have a LAYOUT.  A layout type
-          might discourage such I/O, but it can not forbid it.
         </t>
 
         <t>
@@ -212,36 +212,41 @@
           inconsistent with the iomode specified in the layout segments
           it holds.
         </t>
-
-        <t>
-          The metadata server MUST be able to do allocation and
-          deallocation of storage. I.e., creating and deleting files.
-        </t>
       </list>
     </t>
 
     <t>
-      Under the file layout type, the storage devices are able to meet
-      all of these requirements. However, this is not the case with the
-      other known layout types,  Instead, the burden is shifted to both:
+      Under the file layout type, the storage devices are able to
+      reject any request made not conforming to these requirements.
+      This may not be possible for other known layout types, which
+      puts the burden of enforcing such violations solely on the client.
+      For these layout types:
 
       <list style='format (%d)'>
         <t>
-          The client itself.
+          The metadata server MIGHT use fencing operations to the
+          storage devices to enforce layout revocation against the client.
         </t>
 
         <t>
-          The interaction of the metadata server and the client.
+          The metadata server MUST allow the clients to perform data
+          I/O against it, even if it has already granted the client
+          a layout.  A layout type might discourage such I/O, but it
+          can not forbid it.
+        </t>
+
+        <t>
+          The metadata server MUST be able to do storage allocation,
+          whether that is to create, delete, extend, or truncate files.
         </t>
       </list>
     </t>
 
     <t>
-      The metadata server is responsible for giving the client enough
-      information to make informed decisions and for trusting the
-      client implementation to do so. This communication would be
-      through the callback operatios available to the metadata server,
-      e.g., recalling a layout, a delegation, etc.
+      The means to address these requirements will vary with the layout
+      type.  A control protocol will be used to effect these,
+      whether a purpose-built one, one identical to the storage protocol,
+      or a new standards-track control protocol.
     </t>
   </section>
 
