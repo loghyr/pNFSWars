@@ -66,9 +66,10 @@
   <t>
     As a consequence, new internet drafts (see <xref target='FlexFiles' />
     and <xref target='Lustre' />) may struggle to meet the requirements
-    to be a pNFS layout type. This document specifies the requirements
-    placed on all layout types independent of the particular type chosen,
-    whether one of the original three or any new additional one.
+    to be a pNFS layout type. This document gathers the requirements
+    from  all of the original layout type standard documents and then
+    specifies the requirements placed on all layout types independent
+    of the particular type chosen.
   </t>
 </section>
 
@@ -290,6 +291,5 @@
         </t>
       </list>
     </t>
-
   </section>
 </section>
