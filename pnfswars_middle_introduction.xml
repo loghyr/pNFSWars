@@ -77,7 +77,7 @@
   <t>
     <list style='hanging'>
       <t hangText='control communication requirements:'>
-        define for a layout type the details regarding
+        defines for a layout type the details regarding
         information on layouts, stateids, file metadata, and file
         data which must be  communicated between the metadata
         server and the storage devices.
