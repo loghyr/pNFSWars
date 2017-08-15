@@ -77,14 +77,14 @@
   <t>
     <list style='hanging'>
       <t hangText='control communication requirements:'>
-        defines for a layout type the details regarding
+        are for a layout type the details regarding
         information on layouts, stateids, file metadata, and file
         data which must be  communicated between the metadata
         server and the storage devices.
       </t>
 
       <t hangText='control protocol:'>
-        defines a particular mechanism that an implementation of a
+        is the particular mechanism that an implementation of a
         layout type would use to meet the control communication
         requirement for that layout type.  This need not be a
         protocol as normally understood.  In some cases the same
@@ -122,7 +122,7 @@
       </t>
 
       <t hangText='layout:'>
-        contains information a client uses to access file data on a
+        is the information a client uses to access file data on a
         storage device. This information will include specification
         of the protocol (layout type) and the identity of the storage
         devices to be used.
@@ -133,8 +133,7 @@
       </t>
 
       <t hangText='layout iomode:'>
-        describes whether the layout granted to the client is
-        for read or read/write I/O.
+        is a grant of either read or read/write I/O to the client.
       </t>
 
       <t hangText='layout stateid:'>
@@ -147,13 +146,13 @@
       </t>
 
       <t hangText='layout type:'>
-        specifies both the storage protocol used to
+        is a specification of both the storage protocol used to
         access the data and the aggregation scheme used to lay out
         the file data on the underlying storage devices.
       </t>
 
       <t hangText='loose coupling:'>
-        describes when the control protocol is a storage protocol.
+        is when the control protocol is a storage protocol.
       </t>
 
       <t hangText='(file) metadata:'>
@@ -173,14 +172,14 @@
       </t>
 
       <t hangText='recalling a layout:'>
-        occurs when the metadata server issues a callback to inform
+        is when the metadata server issues a callback to inform
         the client that the layout is to be returned in a graceful
         manner. Note that the client would have the opportunity to flush
         any writes, etc., before replying to the metadata server.
       </t>
 
       <t hangText='revoking a layout:'>
-        occurs when the metadata server invalidates a specific layout.
+        is an invalidation of a specific layout by the metadata server.
         Once revocation occurs, the metadata server will not accept as
         valid any reference to the revoked layout and a storage
         device will not accept any client access based on the layout.
@@ -194,9 +193,9 @@
       </t>
 
       <t hangText='storage device:'>
-        designates the target to which clients may direct I/O requests
-        when they hold an appropriate layout.  Note that each data server
-        is a storage device but that some storage device are not data servers.
+        is the target to which clients may direct I/O requests when they
+        hold an appropriate layout.  Note that each data server is a
+        storage device but that some storage device are not data servers.
         See <xref target='sec:intro:diff' /> for further discussion.
       </t>
 
@@ -207,10 +206,10 @@
       </t>
 
       <t hangText='tight coupling:'>
-        describes a situation in which the control protocol is one
-        designed specifically for that purpose.  It may be either a
-        proprietary protocol, adapted specifically to a a particular
-        metadata server, or one based on a standards-track document.
+        is when the control protocol is one designed specifically for
+        that purpose.  It may be either a proprietary protocol, adapted
+        specifically to a a particular metadata server, or one based on
+        a standards-track document.
       </t>
     </list>
   </t>
@@ -246,15 +245,16 @@
       generic term "storage device" in preference to "data server".
       The term "data server" is used only in contexts in which a file
       server is used as a storage device.  Note that every data
-      server is a storage device but that storage devices which use
-      protocols which are not file access protocol are not data servers.
+      server is a storage device but storage devices which use protocols
+      which are not file access protocols (such as NFS) are not data
+      servers.
     </t>
 
     <t>
-      Since a given storage device may support multiple layout types,
-      a given device can potentially act as a data server for some set of
-      storage protocols while simultaneously acting as a non-data-server
-      storage device for others.
+      Since a given storage device may support multiple layout types, a
+      given device can potentially act as a data server for some set of
+      storage protocols while simultaneously acting as a storage device
+      for others.
     </t>
   </section>
 
