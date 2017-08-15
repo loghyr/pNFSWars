@@ -172,10 +172,10 @@
       </t>
 
       <t hangText='recalling a layout:'>
-        is when the metadata server issues a callback to inform
-        the client that the layout is to be returned in a graceful
-        manner. Note that the client would have the opportunity to flush
-        any writes, etc., before replying to the metadata server.
+        is a graceful recall, via a callback, of a specific layout by
+        the metadata server to the client.  Graceful here means  that
+        the client would have the opportunity to flush any writes, etc.,
+        before returning the layout to the metadata server.
       </t>
 
       <t hangText='revoking a layout:'>
