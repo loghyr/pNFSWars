@@ -103,9 +103,9 @@
       and/or masking), with a target granularity of disks rather than
       individual blocks and a source granularity of individual hosts
       rather than of users or owners.  Access to block storage is
-      logically at a lower layer of the I/O stack than NFSv4. As a result
+      logically at a lower layer of the I/O stack than NFSv4. Since
       NFSv4 security is not directly applicable to protocols that access
-      such storage directly.  As such, Section 2.1
+      such storage directly, Section 2.1
       <xref target='RFC5663' /> specifies that:
 
       <list style='hanging'>
@@ -117,7 +117,7 @@
     </t>
 
     <t>
-      As a result of these granularity issues, the security burden
+      Due to these granularity issues, the security burden
       has been shifted from the storage devices to the client.  Those
       deploying implementations of this layout type need to be sure that
       the client implementation can be trusted  This is not a new sort of
