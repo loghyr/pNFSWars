@@ -85,11 +85,6 @@
           the metadata server has successfully given the client
           a layout, the client MAY still send I/O requests to the
           metadata server.
-          <vspace blankLines="1" />
-          Whether the metadata server allows access over other protocols
-          (e.g., NFSv3, Server Message Block (SMB), etc) is strictly an
-          implementation choice, just as it is in the case of any other
-          (i.e., non-pNFS-supporting) NFSv4.1 server.
         </t>
 
         <t>
