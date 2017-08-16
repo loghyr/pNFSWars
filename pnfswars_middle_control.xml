@@ -18,9 +18,9 @@
   </t>
 
   <t>
-    In some cases, there may be no control protocol other than the storage
-    protocol.  This is often described as using a "loose coupling" model.
-    In such cases, the assumption is that the metadata server,
+    In some cases, there may be no control protocol other than the
+    storage protocol.  This is often described as using a "loose coupling"
+    model.  In such cases, the assumption is that the metadata server,
     storage devices, and client may be changed independently and that
     the implementation requirements in the layout type specification
     need to ensure this degree of interoperability.  This model is used
@@ -28,17 +28,17 @@
   </t>
 
   <t>
-    In other cases, it is assumed that there will be a  purpose-built control
-    protocol which may be different for different implementations of the
-    metadata server and data server.  The assumption here is
-    that the metadata server and data servers are designed and implemented
+    In other cases, it is assumed that there will be a  purpose-built
+    control protocol which may be different for different implementations
+    of the metadata server and data server.  The assumption here is that
+    the metadata server and data servers are designed and implemented
     as a unit and interoperability needs to be assured between clients
     and metadata-data server pairs, developed independently. This is
     the model used for the files layout.
   </t>
 
   <t>
-    Another possibility, not so far realized, is for the definition of
+    Another possibility is for the definition of
     a control protocol to be specified in a standards-track document.
     There are two subcases to consider:
 
@@ -67,6 +67,17 @@
         a functional equivalent.
       </t>
     </list>
+  </t>
+
+  <t>
+    An example of this last case is the SCSI layout type
+    <xref target='RFC8154' />, which extends the block
+    layout type. The block layout type had a requirement
+    for fencing of clients, but did not present a way for
+    the control protocol (in this case the SCSI storage
+    protocol) to fence the client. The SCSI layout type
+    remedies that in <xref target='RFC8154' /> and in
+    effect has a tightly coupled model.
   </t>
 
   <section anchor="sec:control:req" title="Control Protocol REQUIREMENTS">
