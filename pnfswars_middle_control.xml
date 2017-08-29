@@ -80,9 +80,9 @@
     effect has a tightly coupled model.
   </t>
 
-  <section anchor="sec:control:req" title="Control Protocol REQUIREMENTS">
+  <section anchor="sec:control:req" title="Control Protocol Requirements">
     <t>
-      The REQUIREMENTS of interactions between the metadata
+      The requirements of interactions between the metadata
       server and the storage devices are:
 
       <list style='format (%d)'>
@@ -125,7 +125,6 @@
           The file layout requires the storage device to enforce
           access whereas the flex file layout requires both the
           storage device and the client to enforce security.
-
         </t>
 
         <t>
@@ -133,6 +132,10 @@
           existing semantic restrictions.  In particular, if an I/O
           operation would be invalid when directed at the metadata server,
           it is not to be allowed when performed on the storage device.
+          <vspace blankLines="1" />
+          For the block and SCSI layout, as the storage device is not
+          able to reject the I/O operation, the client is responsible
+          for enforcing this requirement.
         </t>
 
         <t>
@@ -186,7 +189,7 @@
     </t>
   </section>
 
-  <section anchor="sec:control:nonreq" title="Previously Undocumented Protocol REQUIREMENTS">
+  <section anchor="sec:control:nonreq" title="Previously Undocumented Protocol Requirements">
     <t>
       While not explicitly stated as requirements in 
       Section 12 of <xref target='RFC5661' />, the existing
@@ -226,7 +229,7 @@
 
       <list style='format (%d)'>
         <t>
-          The metadata server MIGHT use fencing operations to the
+          The metadata server MAY use fencing operations to the
           storage devices to enforce layout revocation against the client.
         </t>
 
@@ -285,7 +288,8 @@
 
         <t>
           If the metadata server implements mandatory byte-range locking
-          when accessed directly by the client, it must do so when data
+          when accessed directly by the client, then the layout type
+          specification must require that this also be done when data
           is read or written using the designated storage protocol.
         </t>
       </list>
