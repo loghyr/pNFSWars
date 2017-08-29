@@ -3,18 +3,18 @@
 
 <section anchor="sec:control" title="The Control Protocol">
   <t>
-    One of the key requirements of a layout type is the need for a
-    mechanism to be used to meet the requirements that apply to the
-    interaction between the metadata server and the storage device such
-    that they present a consistent interface to the client (Section
-    12.2.6 of <xref target='RFC5661' />).  Particular implementations may
-    satisfy this requirement in any manner they choose and the mechanism
-    chosen may not be described as a protocol.  Specifications defining
-    layout types need to clearly show how implementations can meet the
-    requirements discussed below, especially with respect to those that
-    have security implications.  In addition, such specifications may
-    find it necessary to impose requirements on implementations of the
-    layout type to ensure appropriate interoperability.
+    A layout type has to meet the requirements that apply to the
+    interaction between the metadata server and the storage device
+    such that they present to the client a consistent view of stored
+    data and lock state (Section 12.2.6 of <xref target='RFC5661' />).
+    Particular implementations may satisfy these requirements in any
+    manner they choose and the mechanism chosen need not be described
+    as a protocol.  Specifications defining layout types need to clearly
+    show how implementations can meet the requirements discussed below,
+    especially with respect to those that have security implications.
+    In addition, such specifications may find it necessary to impose
+    requirements on implementations of the layout type to ensure
+    appropriate interoperability.
   </t>
 
   <t>
