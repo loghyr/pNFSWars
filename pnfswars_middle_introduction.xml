@@ -88,7 +88,7 @@
         layout type would use to meet the control communication
         requirement for that layout type.  This need not be a
         protocol as normally understood.  In some cases the same
-        protocol may be used as a control protocol and data access
+        protocol may be used as a control protocol and storage
         protocol.
       </t>
 
