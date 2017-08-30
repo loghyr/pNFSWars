@@ -206,10 +206,10 @@
       </t>
 
       <t hangText='tight coupling:'>
-        is when the control protocol is one designed specifically for
-        that purpose.  It may be either a proprietary protocol, adapted
-        specifically to a a particular metadata server, or one based on
-        a standards-track document.
+        is an arrangement in which the control protocol is one
+        designed specifically for that purpose.  It may be either a
+        proprietary protocol, adapted specifically to a a particular
+        metadata server, or one based on a standards-track document.
       </t>
     </list>
   </t>
