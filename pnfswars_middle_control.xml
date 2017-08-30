@@ -110,6 +110,12 @@
           Effective revocation may require client co-operation in using a
           particular stateid (files layout) or principal (e,g., flexible
           files layout) when performing I/O.
+          <vspace blankLines="1" />
+          In contrast, there is no requirement to restrict access to a file
+          on the storage devices when a layout is recalled.  It is only
+          after the metadata server determines that the client is
+          not gracefully returning the layout and starts the revocation
+          that this requirement is enforced.
         </t>
 
         <t>
