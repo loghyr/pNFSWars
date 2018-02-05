@@ -9,6 +9,11 @@
     framework for understating security-related issues within the pNFS
     framework.  Specific security considerations will be addressed in the
     Security Considerations sections of documents specifying layout types.
+    For example, in Section 5 of <xref target="RFC5663" />, the lack
+    of finer-than-physical disk access control necessitates that the
+    client is delegated the responsibility to enforce the access
+    provided to them in the layout extent which they were granted by
+    the metadata server.
   </t>
 
   <t>
