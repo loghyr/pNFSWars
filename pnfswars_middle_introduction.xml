@@ -5,7 +5,8 @@
 
   <t>
     The concept of layout type has a central role in the definition
-    and implementation of Parallel Network File System (pNFS).
+    and implementation of Parallel Network File System (pNFS)
+    (see <xref target='RFC5661' />).
     Clients and servers implementing different layout types behave
     differently in many ways while conforming to the overall pNFS
     framework defined in <xref target='RFC5661' /> and this document.
@@ -64,7 +65,7 @@
   </t>
 
   <t>
-    As a consequence, new internet drafts (see <xref target='FlexFiles' />
+    As a consequence, authors of new specifications (see <xref target='FlexFiles' />
     and <xref target='Lustre' />) may struggle to meet the requirements
     to be a pNFS layout type. This document gathers the requirements
     from  all of the original layout type standard documents and then
@@ -92,6 +93,23 @@
         protocol.
       </t>
 
+      <t hangText='storage protocol:'>
+        is the protocol used by clients to do I/O operations to the
+        storage device.  Each layout type specifies the set of storage
+        protocols.
+      </t>
+
+      <t hangText='loose coupling:'>
+        is when the control protocol is a storage protocol.
+      </t>
+
+      <t hangText='tight coupling:'>
+        is an arrangement in which the control protocol is one
+        designed specifically for that purpose.  It may be either a
+        proprietary protocol, adapted specifically to a a particular
+        metadata server, or one based on a standards-track document.
+      </t>
+
       <t hangText='(file) data:'>
         is that part of the file system object which contains
         the data to read or written. It is the contents of the object
@@ -115,8 +133,15 @@
         term and "data storage device".
       </t>
 
+      <t hangText='storage device:'>
+        is the target to which clients may direct I/O requests when they
+        hold an appropriate layout.  Note that each data server is a
+        storage device but that some storage device are not data servers.
+        See <xref target='sec:intro:diff' /> for further discussion.
+      </t>
+
       <t hangText='fencing:'>
-        is the process by which  the metadata server prevents the storage
+        is the process by which the metadata server prevents the storage
         devices from processing I/O from a specific client to a specific
         file.
       </t>
@@ -151,8 +176,18 @@
         the file data on the underlying storage devices.
       </t>
 
-      <t hangText='loose coupling:'>
-        is when the control protocol is a storage protocol.
+      <t hangText='recalling a layout:'>
+        is a graceful recall, via a callback, of a specific layout by
+        the metadata server to the client.  Graceful here means  that
+        the client would have the opportunity to flush any writes, etc.,
+        before returning the layout to the metadata server.
+      </t>
+
+      <t hangText='revoking a layout:'>
+        is an invalidation of a specific layout by the metadata server.
+        Once revocation occurs, the metadata server will not accept as
+        valid any reference to the revoked layout and a storage
+        device will not accept any client access based on the layout.
       </t>
 
       <t hangText='(file) metadata:'>
@@ -171,45 +206,11 @@
         server itself.
       </t>
 
-      <t hangText='recalling a layout:'>
-        is a graceful recall, via a callback, of a specific layout by
-        the metadata server to the client.  Graceful here means  that
-        the client would have the opportunity to flush any writes, etc.,
-        before returning the layout to the metadata server.
-      </t>
-
-      <t hangText='revoking a layout:'>
-        is an invalidation of a specific layout by the metadata server.
-        Once revocation occurs, the metadata server will not accept as
-        valid any reference to the revoked layout and a storage
-        device will not accept any client access based on the layout.
-      </t>
-
       <t hangText='stateid:'>
         is a 128-bit quantity returned by a server that uniquely defines
         the set of locking-related state provided by the server.
         Stateids may designate state related to open files, to byte-range
         locks, to delegations, or to layouts.
-      </t>
-
-      <t hangText='storage device:'>
-        is the target to which clients may direct I/O requests when they
-        hold an appropriate layout.  Note that each data server is a
-        storage device but that some storage device are not data servers.
-        See <xref target='sec:intro:diff' /> for further discussion.
-      </t>
-
-      <t hangText='storage protocol:'>
-        is the protocol used by clients to do I/O operations to the
-        storage device.  Each layout type specifies the set of storage
-        protocols.
-      </t>
-
-      <t hangText='tight coupling:'>
-        is an arrangement in which the control protocol is one
-        designed specifically for that purpose.  It may be either a
-        proprietary protocol, adapted specifically to a a particular
-        metadata server, or one based on a standards-track document.
       </t>
     </list>
   </t>
