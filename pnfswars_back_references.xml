@@ -133,9 +133,9 @@
         <author initials="T." surname="Haynes" fullname="T. Haynes">
           <organization>Primary Data</organization>
         </author>
-        <date year="2017" month="August" />
+        <date year="2018" month="January" />
       </front>
-      <seriesInfo name="draft-ietf-nfsv4-flex-files-13" value="(Work In Progress)"/>
+      <seriesInfo name="draft-ietf-nfsv4-flex-files-16" value="(Work In Progress)"/>
     </reference>
 
 </references>
