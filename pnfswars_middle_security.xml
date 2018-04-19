@@ -22,7 +22,7 @@
     this directly, by providing that appropriate checks be performed
     at the time each access is performed. It may do it indirectly by
     allowing the client or the storage device to be responsible for
-    making the appropriate checks.  In the latter case, I/O access writes
+    making the appropriate checks.  In the latter case, I/O access rights
     are reflected in layouts and the layout type must provide a way to
     prevent inappropriate access due to permissions changes between the
     time a layout is granted and the time the access is performed.

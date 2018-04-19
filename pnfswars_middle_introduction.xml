@@ -35,12 +35,13 @@
   </t>
 
   <t>
-    Such matters are defined in a standards-track layout type
-    specification.  Except for the files layout type, which was
-    defined in Section 13 of <xref target='RFC5661' />, existing
-    layout types are defined in their own standards-track documents
-    and it is anticipated that new layout types will be defined in
-    similar documents.
+    Each layout type will define the needed details for its usage in
+    the specifciation for that layout type; layout type specifications
+    are always standards-track RFCs.  Except for the files layout type,
+    which was defined in Section 13 of <xref target='RFC5661' />, existing
+    layout types are defined in their own standards-track documents and
+    it is anticipated that new layout types will be defined in similar
+    documents.
   </t>
 
   <t>

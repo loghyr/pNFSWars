@@ -3,13 +3,15 @@
 
 <section anchor="sec:fencing" title="Specifications of Original Layout Types">
   <t>
-    This section updates Section 12 of <xref target='RFC5661' />, which
-    enumerates the requirements of pNFS layout type specifications. It
-    is not normative with regards to the file layout type presented in
-    Section 13 of <xref target='RFC5661' />, the block layout type
-    <xref target='RFC5663' />, and the object layout type
-    <xref target='RFC5664' />. These are discussed here only to
-    illuminate the updates made to Section 12 of <xref target='RFC5661' />.
+    This section discusses how the original layout types interact
+    with Section 12 of <xref target='RFC5661' />, which enumerates the
+    requirements of pNFS layout type specifications. It is not normative
+    with regards to the file layout type presented in Section 13 of
+    <xref target='RFC5661' />, the block layout type <xref target='RFC5663' />,
+    and the object layout type <xref target='RFC5664' />. These
+    are discussed here only to illuminate the updates made in
+    <xref target="sec:control" /> of this document to Section 12
+    of <xref target='RFC5661' />.
   </t>
 
   <section anchor="sec:fencing:files" title="File Layout Type">
