@@ -4,8 +4,8 @@
 YEAR=`date +%Y`
 MONTH=`date +%B`
 DAY=`date +%d`
-PREVVERS=11
-VERS=12
+PREVVERS=12
+VERS=13
 
 XML2RFC=xml2rfc
 
