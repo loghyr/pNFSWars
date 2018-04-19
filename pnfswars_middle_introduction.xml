@@ -77,11 +77,11 @@
 <section anchor='sec:defs' title='Definitions'>
   <t>
     <list style='hanging'>
-      <t hangText='control communication requirements:'>
-        are for a layout type the details regarding
-        information on layouts, stateids, file metadata, and file
-        data which must be  communicated between the metadata
-        server and the storage devices.
+      <t hangText='control communication requirement:'>
+        is the specification for information on layouts, stateids,
+        file metadata, and file data which must be communicated between
+        the metadata server and the storage devices. There is
+        a separate set of requirements for each layout type.
       </t>
 
       <t hangText='control protocol:'>
@@ -112,7 +112,7 @@
 
       <t hangText='(file) data:'>
         is that part of the file system object which contains
-        the data to read or written. It is the contents of the object
+        the data to be read or written. It is the contents of the object
         rather than the attributes of the object.
       </t>
 
