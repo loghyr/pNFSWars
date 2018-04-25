@@ -3,108 +3,80 @@
 
   <references title="Normative References">
 
-    <reference anchor='RFC2119'>
+    <reference  anchor='RFC2119' target='https://www.rfc-editor.org/info/rfc2119'>
       <front>
-	<title abbrev='RFC Key Words'>Key words for use in RFCs to Indicate Requirement Levels</title>
-	<author initials='S.' surname='Bradner' fullname='Scott Bradner'>
-	  <organization>Harvard University</organization>
-	  <address>
-	    <postal>
-	      <street>1350 Mass. Ave.</street>
-	      <street>Cambridge</street>
-	    <street>MA 02138</street></postal>
-	    <phone>- +1 617 495 3864</phone>
-     	<email>sob@harvard.edu</email></address></author>
-     	<date year='1997' month='March' />
+        <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+        <author initials='S.' surname='Bradner' fullname='S. Bradner'><organization /></author>
+        <date year='1997' month='March' />
+        <abstract><t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract>
       </front>
+      <seriesInfo name='BCP' value='14'/>
+      <seriesInfo name='RFC' value='2119'/>
+      <seriesInfo name='DOI' value='10.17487/RFC2119'/>
     </reference>
 
-    <reference anchor='RFC5661'>
-      <front>
-  <title>Network File System (NFS) Version 4 Minor Version 1 Protocol</title>
-  <author initials="S." surname="Shepler" fullname="S. Shepler">
-    <organization>Storspeed, Inc.</organization>
-  </author>
-  <author initials="M." surname="Eisler" fullname="M. Eisler">
-    <organization>NetApp</organization>
-  </author>
-  <author initials="D." surname="Noveck" fullname="D. Noveck">
-    <organization>NetApp</organization>
-  </author>
-  <date year="2010" month="January"/>
-      </front>
-      <seriesInfo name="RFC" value="5661"/>
-      <format type="TXT" octets="600988"
-        target="ftp://ftp.isi.edu/in-notes/rfc5661.txt"/>
-    </reference>
-
-<reference anchor='RFC5663'>
+<reference  anchor='RFC5661' target='https://www.rfc-editor.org/info/rfc5661'>
 <front>
-<title>pNFS Block/Volume Layout</title>
-
-<author initials='D' surname='Black' fullname='David Black'>
-    <organization />
-</author>
-
-<author initials='S' surname='Fridella' fullname='Stephen Fridella'>
-    <organization />
-</author>
-
-<author initials='J' surname='Glasgow' fullname='Jason Glasgow'>
-    <organization />
-</author>
-
-  <date month='January' year='2010' />
-<abstract><t>Parallel NFS (pNFS) extends NFSv4 to allow clients to directly access file data on the storage used by the NFSv4 server.  This ability to bypass the server for data access can increase both performance and parallelism, but requires additional client functionality for data access, some of which is dependent on the class of storage used.  The main pNFS operations draft specifies storage-class-independent extensions to NFS; this draft specifies the additional extensions (primarily data structures) for use of pNFS with block and volume based storage.</t></abstract>
-
+<title>Network File System (NFS) Version 4 Minor Version 1 Protocol</title>
+<author initials='S.' surname='Shepler' fullname='S. Shepler' role='editor'><organization /></author>
+<author initials='M.' surname='Eisler' fullname='M. Eisler' role='editor'><organization /></author>
+<author initials='D.' surname='Noveck' fullname='D. Noveck' role='editor'><organization /></author>
+<date year='2010' month='January' />
+<abstract><t>This document describes the Network File System (NFS) version 4 minor version 1, including features retained from the base protocol (NFS version 4 minor version 0, which is specified in RFC 3530) and protocol extensions made subsequently.  Major extensions introduced in NFS version 4 minor version 1 include Sessions, Directory Delegations, and parallel NFS (pNFS).  NFS version 4 minor version 1 has no dependencies on NFS version 4 minor version 0, and it is considered a separate protocol.  Thus, this document neither updates nor obsoletes RFC 3530.  NFS minor version 1 is deemed superior to NFS minor version 0 with no loss of functionality, and its use is preferred over version 0.  Both NFS minor versions 0 and 1 can be used simultaneously on the same network, between the same client and server.  [STANDARDS-TRACK]</t></abstract>
 </front>
-
-      <seriesInfo name='RFC' value='5663' />
-      <format type='TXT' target='http://ietf.org/rfc/rfc5663.txt' />
+<seriesInfo name='RFC' value='5661'/>
+<seriesInfo name='DOI' value='10.17487/RFC5661'/>
 </reference>
 
-    <reference anchor='RFC5664'>
-      <front>
-  <title>Object-Based Parallel NFS (pNFS) Operations</title>
-  <author initials="B." surname="Halevy" fullname="B. Halevy">
-    <organization>Panasas</organization>
-  </author>
-  <author initials="B." surname="Welch" fullname="B. Welch">
-    <organization>Panasas</organization>
-  </author>
-  <author initials="J." surname="Zelenka" fullname="J. Zelenka">
-    <organization>Panasas</organization>
-  </author>
-  <date year="2010" month="January"/>
-      </front>
-      <seriesInfo name="RFC" value="5664"/>
-      <format type="TXT"
-        target="ftp://ftp.isi.edu/in-notes/rfc5664.txt"/>
-    </reference>
 
-    <reference anchor="RFC8154" target="http://www.rfc-editor.org/info/rfc8154">
-      <front>
-        <title>
-          Parallel NFS (pNFS) Small Computer System Interface (SCSI) Layout
-        </title>
-        <author initials="C." surname="Hellwig" fullname="C. Hellwig">
-          <organization/>
-        </author>
-        <date year="2017" month="May"/>
-        <abstract>
-          <t>
-            The Parallel Network File System (pNFS) allows a separation
-            between the metadata (onto a metadata server) and data (onto
-            a storage device) for a file. The Small Computer System
-            Interface (SCSI) layout type is defined in this document as
-            an extension to pNFS to allow the use of SCSI-based block
-            storage devices.
-          </t>
-        </abstract>
-      </front>
-      <seriesInfo name="RFC" value="8154"/>
-      <seriesInfo name="DOI" value="10.17487/RFC8154"/>
-    </reference>
+<reference  anchor='RFC5663' target='https://www.rfc-editor.org/info/rfc5663'>
+<front>
+<title>Parallel NFS (pNFS) Block/Volume Layout</title>
+<author initials='D.' surname='Black' fullname='D. Black'><organization /></author>
+<author initials='S.' surname='Fridella' fullname='S. Fridella'><organization /></author>
+<author initials='J.' surname='Glasgow' fullname='J. Glasgow'><organization /></author>
+<date year='2010' month='January' />
+<abstract><t>Parallel NFS (pNFS) extends Network File Sharing version 4 (NFSv4) to allow clients to directly access file data on the storage used by the NFSv4 server.  This ability to bypass the server for data access can increase both performance and parallelism, but requires additional client functionality for data access, some of which is dependent on the class of storage used.  The main pNFS operations document specifies storage-class-independent extensions to NFS; this document specifies the additional extensions (primarily data structures) for use of pNFS with block- and volume-based storage.  [STANDARDS-TRACK]</t></abstract>
+</front>
+<seriesInfo name='RFC' value='5663'/>
+<seriesInfo name='DOI' value='10.17487/RFC5663'/>
+</reference>
+
+<reference  anchor='RFC5664' target='https://www.rfc-editor.org/info/rfc5664'>
+<front>
+<title>Object-Based Parallel NFS (pNFS) Operations</title>
+<author initials='B.' surname='Halevy' fullname='B. Halevy'><organization /></author>
+<author initials='B.' surname='Welch' fullname='B. Welch'><organization /></author>
+<author initials='J.' surname='Zelenka' fullname='J. Zelenka'><organization /></author>
+<date year='2010' month='January' />
+<abstract><t>Parallel NFS (pNFS) extends Network File System version 4 (NFSv4) to allow clients to directly access file data on the storage used by the NFSv4 server.  This ability to bypass the server for data access can increase both performance and parallelism, but requires additional client functionality for data access, some of which is dependent on the class of storage used, a.k.a. the Layout Type.  The main pNFS operations and data types in NFSv4 Minor version 1 specify a layout- type-independent layer; layout-type-specific information is conveyed using opaque data structures whose internal structure is further defined by the particular layout type specification.  This document specifies the NFSv4.1 Object-Based pNFS Layout Type as a companion to the main NFSv4 Minor version 1 specification.  [STANDARDS-TRACK]</t></abstract>
+</front>
+<seriesInfo name='RFC' value='5664'/>
+<seriesInfo name='DOI' value='10.17487/RFC5664'/>
+</reference>
+
+<reference  anchor='RFC8154' target='https://www.rfc-editor.org/info/rfc8154'>
+<front>
+<title>Parallel NFS (pNFS) Small Computer System Interface (SCSI) Layout</title>
+<author initials='C.' surname='Hellwig' fullname='C. Hellwig'><organization /></author>
+<date year='2017' month='May' />
+<abstract><t>The Parallel Network File System (pNFS) allows a separation between the metadata (onto a metadata server) and data (onto a storage device) for a file.  The Small Computer System Interface (SCSI) layout type is defined in this document as an extension to pNFS to allow the use of SCSI-based block storage devices.</t></abstract>
+</front>
+<seriesInfo name='RFC' value='8154'/>
+<seriesInfo name='DOI' value='10.17487/RFC8154'/>
+</reference>
+
+<reference  anchor='RFC8174' target='https://www.rfc-editor.org/info/rfc8174'>
+<front>
+<title>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
+<author initials='B.' surname='Leiba' fullname='B. Leiba'><organization /></author>
+<date year='2017' month='May' />
+<abstract><t>RFC 2119 specifies common key words that may be used in protocol  specifications.  This document aims to reduce the ambiguity by clarifying that only UPPERCASE usage of the key words have the  defined special meanings.</t></abstract>
+</front>
+<seriesInfo name='BCP' value='14'/>
+<seriesInfo name='RFC' value='8174'/>
+<seriesInfo name='DOI' value='10.17487/RFC8174'/>
+</reference>
 
 </references>
 
